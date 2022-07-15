@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 /**
  * An object for representing an authentication token.
  */
@@ -43,8 +45,12 @@ public class AuthToken {
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
-        if (!super.equals(object)) return false;
         AuthToken authToken = (AuthToken) object;
         return authtoken.equals(authToken.authtoken) && username.equals(authToken.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(authtoken, username);
     }
 }

@@ -18,7 +18,7 @@ public class PersonDAO {
     /**
      * Creates the database connection
      *
-     * @param conn the database to connect to?
+     * @param conn the familymap database session
      */
     public PersonDAO(Connection conn) {
         this.conn = conn;

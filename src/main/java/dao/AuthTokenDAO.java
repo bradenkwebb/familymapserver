@@ -16,7 +16,7 @@ public class AuthTokenDAO {
     /**
      * Creates the database connection.
      *
-     * @param conn
+     * @param conn the familymap database session
      */
     public AuthTokenDAO(Connection conn) {
         this.conn = conn;
@@ -26,10 +26,20 @@ public class AuthTokenDAO {
      * Inserts a new row, corresponding to an authtoken, into the AuthTokens table of our database.
      *
      * @param auth the authtoken to add to the database.
-     * @throws DataAccessException
+     * @throws DataAccessException if error occurs
      */
     public void insert(AuthToken auth) throws DataAccessException {
-        // TODO implement me
+        String sql = "INSERT INTO AuthTokens (authtoken, username) VALUES(?, ?)";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, auth.getAuthtoken());
+            stmt.setString(2, auth.getUsername());
+
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new DataAccessException("Error occurred while inserting into AuthTokens table");
+        }
     }
 
     /**
@@ -38,19 +48,40 @@ public class AuthTokenDAO {
      *
      * @param token the token string to search for.
      * @return the token and associated username as an AuthToken object if found; otherwise null
-     * @throws DataAccessException
+     * @throws DataAccessException if error occurs
      */
     public AuthToken find(String token) throws DataAccessException {
-        // TODO implement me
-        return null;
+        String sql = "SELECT * FROM AuthTokens WHERE authtoken = ?;";
+        ResultSet rs;
+        AuthToken auth;
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, token);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                auth = new AuthToken(rs.getString("authtoken"), rs.getString("username"));
+                return auth;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new DataAccessException("Error occurred while searching database for authtoken");
+        }
     }
 
     /**
      * Clears the AuthTokens table in our database.
      *
-     * @throws DataAccessException
+     * @throws DataAccessException if error occurs
      */
     public void clear() throws DataAccessException {
-        // TODO imlpement me!
+        String sql = "DELETE FROM Authtokens";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new DataAccessException("Error occurred while clearing AuthTokens table.");
+        }
     }
 }

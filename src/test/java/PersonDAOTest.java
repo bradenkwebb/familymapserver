@@ -45,8 +45,6 @@ public class PersonDAOTest {
 
         assertNotNull(comparePerson);
         assertEquals(bestPerson, comparePerson);
-
-        // TODO implement me!
     }
 
     @Test
@@ -55,8 +53,6 @@ public class PersonDAOTest {
 
         pDao.insert(bestPerson);
         assertThrows(DataAccessException.class, () -> pDao.insert(bestPerson));
-
-        // TODO implement me!
     }
 
     @Test
@@ -69,18 +65,22 @@ public class PersonDAOTest {
 
         assertNotNull(comparePerson);
         assertEquals(bestPerson, comparePerson);
-
-
-        // TODO implement me!
     }
 
     @Test
     public void findFail() throws DataAccessException {
         System.out.println("findFail() called.");
-        System.out.println("THIS ISN'T IMPLEMENTED YET!!!");
-        // TODO implement me!
+
+        pDao.clear();
+        assertNull(pDao.find("xzvc"));
     }
 
-    //TODO implement more of these!!
+    @Test
+    public void clearPass() throws DataAccessException {
+        System.out.println("clearPass() called.");
 
+        pDao.insert(bestPerson);
+        pDao.clear();
+        assertDoesNotThrow(() -> pDao.insert(bestPerson));
+    }
 }
