@@ -1,5 +1,6 @@
-package dao;
-
+import dao.DataAccessException;
+import dao.Database;
+import dao.EventDAO;
 import model.Event;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +18,8 @@ public class EventDAOTest {
 
     @BeforeEach
     public void setUp() throws DataAccessException {
+        System.out.println("Setup called.");
+
         // Here we can set up any classes or variables we will need for each test
         // lets create a new instance of the Database class
         db = new Database();
@@ -35,6 +38,7 @@ public class EventDAOTest {
 
     @AfterEach
     public void tearDown() {
+        System.out.println("Cleanup called.");
         // Here we close the connection to the database file, so it can be opened again later.
         // We will set commit to false because we do not want to save the changes to the database
         // between test cases.
@@ -43,6 +47,7 @@ public class EventDAOTest {
 
     @Test
     public void insertPass() throws DataAccessException {
+        System.out.println("insertPass() called.");
         // Start by inserting an event into the database.
         eDao.insert(bestEvent);
         // Let's use a find method to get the event that we just put in back out.
@@ -59,6 +64,7 @@ public class EventDAOTest {
 
     @Test
     public void insertFail() throws DataAccessException {
+        System.out.println("insertFail() called.");
         // Let's do this test again, but this time lets try to make it fail.
         // If we call the method the first time the event will be inserted successfully.
         eDao.insert(bestEvent);

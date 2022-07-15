@@ -1,2 +1,7 @@
-package services;public interface Service {
+package services;
+
+/**
+ * An interface for the services.
+ */
+public interface Service {
 }

@@ -1,7 +1,7 @@
 package model;
 
 /**
- * An object corresponding to a user.
+ * An object for representing a user.
  */
 public class User{
     /**
@@ -27,7 +27,7 @@ public class User{
     /**
      * The user's gender (either 'f' or 'm').
      */
-    private char gender;
+    private String gender;
     /**
      * The identifier for the Person object to which this user corresponds.
      */
@@ -45,7 +45,7 @@ public class User{
      * @param personID an identifier for the corresponding Person object.
      */
     public User(String username, String password, String email, String firstName,
-                String lastName, char gender, String personID) {
+                String lastName, String gender, String personID) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -61,7 +61,7 @@ public class User{
 
     public String getPassword() { return password;}
 
-    public void setPassword(String password) { this.password = password }
+    public void setPassword(String password) { this.password = password; }
 
     public String getEmail() { return email; }
 
@@ -75,9 +75,9 @@ public class User{
 
     public void setLastName(String lastName) { this.lastName = lastName; }
 
-    public char getGender() { return gender; }
+    public String getGender() { return gender; }
 
-    public void setGender(char gender) { this.gender = gender; }
+    public void setGender(String gender) { this.gender = gender; }
 
     public String getPersonID() { return personID; }
 

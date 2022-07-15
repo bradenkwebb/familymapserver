@@ -2,6 +2,7 @@ package dao;
 
 import model.Event;
 import java.sql.*;
+import java.util.List;
 
 /**
  * A data access object for accessing, querying, and editing events in the SQL database.
@@ -82,6 +83,18 @@ public class EventDAO {
             throw new DataAccessException("Error encountered while finding an event in the database");
         }
 
+    }
+
+    /**
+     * Obtains a list of all of the events associated with the given user.
+     *
+     * @param username The username of the user whose associated events we're looking for.
+     * @return a list of all of the events associated with the given user.
+     * @throws DataAccessException
+     */
+    public List<Event> getAllFromUser(String username) throws DataAccessException {
+        //TODO implement me!
+        return null;
     }
 
     /**

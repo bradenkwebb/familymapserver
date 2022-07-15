@@ -3,12 +3,7 @@ package results;
 /**
  * An object representation of an HTTP /event/[eventID] response body.
  */
-public class GetEventResponse implements Response {
-
-    /**
-     * Whether or not the server successfully implemented the request.
-     */
-    private boolean success;
+public class GetEventResult extends Result {
 
     /**
      * The username associated with the event.
@@ -55,25 +50,12 @@ public class GetEventResponse implements Response {
      */
     private int year;
 
-    /**
-     * If the server failed to execute the request, a message to provide to the client.
-     */
-    private String message;
 
     /**
      * Creates the object.
      */
-    public GetEventResponse() {
+    public GetEventResult() {
         //TODO implement this constructor
-    }
-
-    @Override
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
     }
 
     public String getAssociatedUsername() {
@@ -146,13 +128,5 @@ public class GetEventResponse implements Response {
 
     public void setYear(int year) {
         this.year = year;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 }

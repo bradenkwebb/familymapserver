@@ -1,4 +1,4 @@
-import package model;
+package model;
 
 /**
  * An object for representing an authentication token.

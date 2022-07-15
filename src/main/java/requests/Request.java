@@ -1,2 +1,4 @@
-package requests;public interface Request {
+package requests;
+
+public interface Request {
 }

@@ -1,7 +1,9 @@
 package model;
 
+import java.util.Objects;
+
 /**
- * An object for storing all data for an individual person.
+ * An object for representing an individual person.
  */
 public class Person {
 
@@ -28,7 +30,7 @@ public class Person {
     /**
      * The person's gender, either 'f' or 'm'.
      */
-    private char gender;
+    private String gender;
 
     /**
      * The personID for the person's father, if the father is in the tree.
@@ -54,7 +56,7 @@ public class Person {
      * @param lastName the value to set for the person's last name.
      * @param gender the person's gender, either 'f' or 'm'.
      */
-    public Person(String personID, String associatedUsername, String firstName, String lastName, char gender) {
+    public Person(String personID, String associatedUsername, String firstName, String lastName, String gender) {
         this.personID = personID;
         this.associatedUsername = associatedUsername;
         this.firstName = firstName;
@@ -74,9 +76,9 @@ public class Person {
      * @param motherId the personID for the person's mother.
      * @param spouseID the personID for the person's spouse.
      */
-    public Person(String personID, String associatedUsername, String firstName, String lastName, char gender,
+    public Person(String personID, String associatedUsername, String firstName, String lastName, String gender,
                   String fatherID, String motherId, String spouseID) {
-        Person(personID, associatedUsername, firstName, lastName, gender);
+        this(personID, associatedUsername, firstName, lastName, gender);
         this.fatherID = fatherID;
         this.motherID = motherId;
         this.spouseID = spouseID;
@@ -98,9 +100,9 @@ public class Person {
 
     public void setLastName(String lastName) { this.lastName = lastName; }
 
-    public char getGender() { return gender; }
+    public String getGender() { return gender; }
 
-    public void setGender(char gender) { this.gender = gender; }
+    public void setGender(String gender) { this.gender = gender; }
 
     public String getFatherID() { return fatherID; }
 
@@ -123,9 +125,9 @@ public class Person {
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
-        if (!super.equals(object)) return false;
         Person person = (Person) object;
-        return gender == person.gender && personID.equals(person.personID) &&
+        return Objects.equals(gender, person.gender) &&
+                personID.equals(person.personID) &&
                 associatedUsername.equals(person.associatedUsername) && firstName.equals(person.firstName) &&
                 lastName.equals(person.lastName) && java.util.Objects.equals(fatherID, person.fatherID) &&
                 java.util.Objects.equals(motherID, person.motherID) &&

@@ -3,11 +3,7 @@ package results;
 /**
  * An object representation of an HTTP /person/[personID] response body.
  */
-public class GetPersonResponse implements Response {
-    /**
-     * Whether or not the server responded to the request succesfully.
-     */
-    private boolean success;
+public class GetPersonResult extends Result {
 
     /**
      * The user with whom the obtained person is associated.
@@ -45,24 +41,10 @@ public class GetPersonResponse implements Response {
     private String spouseID;
 
     /**
-     * A message to provide to the client if there was an error.
-     */
-    private String message;
-
-    /**
      * Creates the object.
      */
-    public GetPersonResponse() {
+    public GetPersonResult() {
         // TODO implement this constructor
-    }
-
-    @Override
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
     }
 
     public String getAssociatedUsername() {
@@ -119,13 +101,5 @@ public class GetPersonResponse implements Response {
 
     public void setSpouseID(String spouseID) {
         this.spouseID = spouseID;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 }

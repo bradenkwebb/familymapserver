@@ -3,7 +3,7 @@ package results;
 /**
  * An object representation of an HTTP /register response body.
  */
-public class RegisterResponse implements Response {
+public class RegisterResult extends Result {
 
     /**
      * The authtoken generated for this user's login session.
@@ -21,20 +21,10 @@ public class RegisterResponse implements Response {
     private String personID;
 
     /**
-     * Whether or not the register attempt was successful.
-     */
-    private boolean success;
-
-    /**
-     * If the request failed, an error message explaining why.
-     */
-    private String message;
-
-    /**
      * Creates the Response object. If the request was successful, the fields authtoken, username, and personID should
      * be set, with success=true. If the request was unsuccessful, the message field should be set, with success=false.
      */
-    public RegisterResponse() {
+    public RegisterResult() {
         // TODO implement this constructor?
     }
 
@@ -60,21 +50,5 @@ public class RegisterResponse implements Response {
 
     public void setPersonID(String personID) {
         this.personID = personID;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 }

@@ -14,14 +14,9 @@ public class GetAllEventsResult extends Result {
     private List<Event> data;
 
     /**
-     * If the server was unsuccessful, the message to provide the client.
-     */
-    private String message;
-
-    /**
      * Creates the object.
      */
-    public GetAllEventsResponse() {
+    public GetAllEventsResult() {
         //TODO implement this constructor
     }
 
@@ -31,13 +26,5 @@ public class GetAllEventsResult extends Result {
 
     public void setData(List<Event> data) {
         this.data = data;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 }

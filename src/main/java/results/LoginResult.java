@@ -3,12 +3,7 @@ package results;
 /**
  * An object representation of an HTTP /login response body.
  */
-public class LoginResponse implements Response {
-
-    /**
-     * Whether or not the LoginRequest was successful.
-     */
-    private boolean success;
+public class LoginResult extends Result {
 
     /**
      * The generated authtoken.
@@ -26,24 +21,11 @@ public class LoginResponse implements Response {
     private String personID;
 
     /**
-     * If the request failed, a description of the error.
-     */
-    private String message;
-
-    /**
      * Creates the Response object. If the request was successful, the fields authtoken, username, and personID should
      * be set, with success=true. If the request was unsuccessful, the message field should be set, with success=false.
      */
-    public LoginResponse() {
+    public LoginResult() {
         // TODO implement this constructor
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
     }
 
     public String getAuthtoken() {
@@ -68,13 +50,5 @@ public class LoginResponse implements Response {
 
     public void setPersonID(String personID) {
         this.personID = personID;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 }
