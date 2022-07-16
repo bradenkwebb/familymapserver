@@ -1,0 +1,9 @@
+2022-07-16 16:08:27 INFO Server run Initializing HTTP Server
+2022-07-16 16:08:27 FINE sun.net.httpserver.ServerImpl <init> HttpServer created http 0.0.0.0/0.0.0.0:8080
+2022-07-16 16:08:27 INFO Server run Creating contexts
+2022-07-16 16:08:27 FINE sun.net.httpserver.ServerImpl createContext context created: /
+2022-07-16 16:08:27 FINE sun.net.httpserver.ServerImpl createContext context created: /clear
+2022-07-16 16:08:27 FINE sun.net.httpserver.ServerImpl createContext context created: /user/register
+2022-07-16 16:08:27 FINE sun.net.httpserver.ServerImpl createContext context created: /user/login
+2022-07-16 16:08:27 INFO Server run Starting server
+2022-07-16 16:08:27 INFO Server run Server started

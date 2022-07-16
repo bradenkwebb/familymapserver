@@ -1,6 +1,7 @@
 package services;
 
 import requests.LoginRequest;
+import results.LoginResult;
 
 /**
  * Implements the /user/login service.
@@ -17,7 +18,8 @@ public class LoginService implements Service {
      *
      * @param r the LoginRequest object to process.
      */
-    public void login(LoginRequest r) {
+    public LoginResult login(LoginRequest r) {
         // TODO implement LoginService().login()
+        return null;
     }
 }

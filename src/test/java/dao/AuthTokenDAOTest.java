@@ -1,4 +1,4 @@
-package passoff;
+package dao;
 
 import dao.AuthTokenDAO;
 import dao.DataAccessException;

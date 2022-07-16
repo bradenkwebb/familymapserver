@@ -1,3 +1,5 @@
+package dao;
+
 import dao.DataAccessException;
 import dao.Database;
 import dao.PersonDAO;

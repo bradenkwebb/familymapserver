@@ -33,7 +33,7 @@ public class RegisterRequest implements Request {
     /**
      * The provided gender, either 'f' or 'm'.
      */
-    private char gender;
+    private String gender;
 
     /**
      * Creates the Request object (and potentially deserializes a provided JSON string into the object?).
@@ -83,11 +83,11 @@ public class RegisterRequest implements Request {
         this.lastName = lastName;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 }
