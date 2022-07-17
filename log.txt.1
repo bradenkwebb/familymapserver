@@ -1,9 +1,150 @@
-2022-07-16 16:08:27 INFO Server run Initializing HTTP Server
-2022-07-16 16:08:27 FINE sun.net.httpserver.ServerImpl <init> HttpServer created http 0.0.0.0/0.0.0.0:8080
-2022-07-16 16:08:27 INFO Server run Creating contexts
-2022-07-16 16:08:27 FINE sun.net.httpserver.ServerImpl createContext context created: /
-2022-07-16 16:08:27 FINE sun.net.httpserver.ServerImpl createContext context created: /clear
-2022-07-16 16:08:27 FINE sun.net.httpserver.ServerImpl createContext context created: /user/register
-2022-07-16 16:08:27 FINE sun.net.httpserver.ServerImpl createContext context created: /user/login
-2022-07-16 16:08:27 INFO Server run Starting server
-2022-07-16 16:08:27 INFO Server run Server started
+2022-07-16 17:54:50 INFO Server run Initializing HTTP Server
+2022-07-16 17:54:50 FINE sun.net.httpserver.ServerImpl <init> HttpServer created http 0.0.0.0/0.0.0.0:8080
+2022-07-16 17:54:50 INFO Server run Creating contexts
+2022-07-16 17:54:50 FINE sun.net.httpserver.ServerImpl createContext context created: /
+2022-07-16 17:54:50 FINE sun.net.httpserver.ServerImpl createContext context created: /clear
+2022-07-16 17:54:50 FINE sun.net.httpserver.ServerImpl createContext context created: /user/register
+2022-07-16 17:54:50 FINE sun.net.httpserver.ServerImpl createContext context created: /user/login
+2022-07-16 17:54:50 INFO Server run Starting server
+2022-07-16 17:54:50 INFO Server run Server started
+2022-07-16 17:54:58 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:54:58 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/login HTTP/1.1
+2022-07-16 17:54:58 FINER LoginHandler handle ENTRY
+2022-07-16 17:54:58 FINER sun.net.httpserver.ServerImpl$Exchange run ServerImpl.Exchange (4)
+java.lang.NullPointerException: Cannot invoke "results.LoginResult.isSuccess()" because "result" is null
+	at handlers.LoginHandler.handle(LoginHandler.java:38)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:736)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:703)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:162)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:450)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:416)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+2022-07-16 17:54:58 FINER sun.net.httpserver.HttpConnection close Closing connection: java.nio.channels.SocketChannel[connected local=/[0:0:0:0:0:0:0:1]:8080 remote=/[0:0:0:0:0:0:0:1]:64450]
+2022-07-16 17:55:01 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:55:01 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/register HTTP/1.1
+2022-07-16 17:55:01 FINER RegisterHandler handle ENTRY
+2022-07-16 17:55:01 FINEST handlers.RegisterHandler handle /user/register
+2022-07-16 17:55:01 FINER RegisterService register ENTRY
+2022-07-16 17:55:01 SEVERE services.RegisterService register Error encountered while inserting a user into the database
+dao.DataAccessException: Error encountered while inserting a user into the database
+	at dao.UserDAO.insert(UserDAO.java:43)
+	at services.RegisterService.register(RegisterService.java:46)
+	at handlers.RegisterHandler.handle(RegisterHandler.java:29)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:736)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:703)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:162)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:450)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:416)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+2022-07-16 17:55:01 FINER RegisterService register RETURN
+2022-07-16 17:55:01 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:55:01 FINE sun.net.httpserver.ServerImpl logReply POST /user/register HTTP/1.1 [400  Bad Request] ()
+2022-07-16 17:55:01 FINER RegisterHandler handle RETURN
+2022-07-16 17:55:01 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-16 17:55:01 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:55:01 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/register HTTP/1.1
+2022-07-16 17:55:01 FINER RegisterHandler handle ENTRY
+2022-07-16 17:55:01 FINEST handlers.RegisterHandler handle /user/register
+2022-07-16 17:55:01 FINER RegisterService register ENTRY
+2022-07-16 17:55:01 SEVERE services.RegisterService register Error encountered while inserting a user into the database
+dao.DataAccessException: Error encountered while inserting a user into the database
+	at dao.UserDAO.insert(UserDAO.java:43)
+	at services.RegisterService.register(RegisterService.java:46)
+	at handlers.RegisterHandler.handle(RegisterHandler.java:29)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:736)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:703)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:162)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:450)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:416)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+2022-07-16 17:55:01 FINER RegisterService register RETURN
+2022-07-16 17:55:02 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:55:02 FINE sun.net.httpserver.ServerImpl logReply POST /user/register HTTP/1.1 [400  Bad Request] ()
+2022-07-16 17:55:02 FINER RegisterHandler handle RETURN
+2022-07-16 17:55:02 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-16 17:55:08 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:55:08 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /clear HTTP/1.1
+2022-07-16 17:55:08 FINER ClearHandler handle ENTRY
+2022-07-16 17:55:08 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:55:08 FINE sun.net.httpserver.ServerImpl logReply POST /clear HTTP/1.1 [200  OK] ()
+2022-07-16 17:55:08 FINER ClearHandler handle RETURN
+2022-07-16 17:55:08 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-16 17:55:10 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:55:10 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/register HTTP/1.1
+2022-07-16 17:55:10 FINER RegisterHandler handle ENTRY
+2022-07-16 17:55:10 FINEST handlers.RegisterHandler handle /user/register
+2022-07-16 17:55:10 FINER RegisterService register ENTRY
+2022-07-16 17:55:10 FINER RegisterService register RETURN
+2022-07-16 17:55:10 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:55:10 FINE sun.net.httpserver.ServerImpl logReply POST /user/register HTTP/1.1 [200  OK] ()
+2022-07-16 17:55:10 FINER RegisterHandler handle RETURN
+2022-07-16 17:55:10 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-16 17:55:13 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:55:13 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/login HTTP/1.1
+2022-07-16 17:55:13 FINER LoginHandler handle ENTRY
+2022-07-16 17:55:13 FINER sun.net.httpserver.ServerImpl$Exchange run ServerImpl.Exchange (4)
+java.lang.NullPointerException: Cannot invoke "results.LoginResult.isSuccess()" because "result" is null
+	at handlers.LoginHandler.handle(LoginHandler.java:38)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:736)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:703)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:162)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:450)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:416)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+2022-07-16 17:55:13 FINER sun.net.httpserver.HttpConnection close Closing connection: java.nio.channels.SocketChannel[connected local=/[0:0:0:0:0:0:0:1]:8080 remote=/[0:0:0:0:0:0:0:1]:64459]
+2022-07-16 17:55:13 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:55:13 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/login HTTP/1.1
+2022-07-16 17:55:13 FINER LoginHandler handle ENTRY
+2022-07-16 17:55:13 FINER sun.net.httpserver.ServerImpl$Exchange run ServerImpl.Exchange (4)
+java.lang.NullPointerException: Cannot invoke "results.LoginResult.isSuccess()" because "result" is null
+	at handlers.LoginHandler.handle(LoginHandler.java:38)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:736)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:703)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:162)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:450)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:416)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+2022-07-16 17:55:13 FINER sun.net.httpserver.HttpConnection close Closing connection: java.nio.channels.SocketChannel[connected local=/[0:0:0:0:0:0:0:1]:8080 remote=/[0:0:0:0:0:0:0:1]:64494]
+2022-07-16 17:55:14 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:55:14 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/login HTTP/1.1
+2022-07-16 17:55:14 FINER LoginHandler handle ENTRY
+2022-07-16 17:55:14 FINER sun.net.httpserver.ServerImpl$Exchange run ServerImpl.Exchange (4)
+java.lang.NullPointerException: Cannot invoke "results.LoginResult.isSuccess()" because "result" is null
+	at handlers.LoginHandler.handle(LoginHandler.java:38)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:736)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:703)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:162)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:450)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:416)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+2022-07-16 17:55:14 FINER sun.net.httpserver.HttpConnection close Closing connection: java.nio.channels.SocketChannel[connected local=/[0:0:0:0:0:0:0:1]:8080 remote=/[0:0:0:0:0:0:0:1]:64497]

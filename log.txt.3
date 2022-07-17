@@ -1,9 +1,124 @@
-2022-07-16 16:08:27 INFO Server run Initializing HTTP Server
-2022-07-16 16:08:27 FINE sun.net.httpserver.ServerImpl <init> HttpServer created http 0.0.0.0/0.0.0.0:8080
-2022-07-16 16:08:27 INFO Server run Creating contexts
-2022-07-16 16:08:27 FINE sun.net.httpserver.ServerImpl createContext context created: /
-2022-07-16 16:08:27 FINE sun.net.httpserver.ServerImpl createContext context created: /clear
-2022-07-16 16:08:27 FINE sun.net.httpserver.ServerImpl createContext context created: /user/register
-2022-07-16 16:08:27 FINE sun.net.httpserver.ServerImpl createContext context created: /user/login
-2022-07-16 16:08:27 INFO Server run Starting server
-2022-07-16 16:08:27 INFO Server run Server started
+2022-07-16 17:49:48 INFO Server run Initializing HTTP Server
+2022-07-16 17:49:48 FINE sun.net.httpserver.ServerImpl <init> HttpServer created http 0.0.0.0/0.0.0.0:8080
+2022-07-16 17:49:48 INFO Server run Creating contexts
+2022-07-16 17:49:48 FINE sun.net.httpserver.ServerImpl createContext context created: /
+2022-07-16 17:49:48 FINE sun.net.httpserver.ServerImpl createContext context created: /clear
+2022-07-16 17:49:48 FINE sun.net.httpserver.ServerImpl createContext context created: /user/register
+2022-07-16 17:49:48 FINE sun.net.httpserver.ServerImpl createContext context created: /user/login
+2022-07-16 17:49:48 INFO Server run Starting server
+2022-07-16 17:49:49 INFO Server run Server started
+2022-07-16 17:49:53 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:49:53 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/register HTTP/1.1
+2022-07-16 17:49:53 FINER RegisterHandler handle ENTRY
+2022-07-16 17:49:53 FINEST handlers.RegisterHandler handle /user/register
+2022-07-16 17:49:53 FINER RegisterService register ENTRY
+2022-07-16 17:49:53 SEVERE services.RegisterService register Error encountered while inserting a user into the database
+dao.DataAccessException: Error encountered while inserting a user into the database
+	at dao.UserDAO.insert(UserDAO.java:43)
+	at services.RegisterService.register(RegisterService.java:46)
+	at handlers.RegisterHandler.handle(RegisterHandler.java:29)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:736)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:703)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:162)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:450)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:416)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+2022-07-16 17:49:53 FINER RegisterService register RETURN
+2022-07-16 17:49:53 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:49:53 FINE sun.net.httpserver.ServerImpl logReply POST /user/register HTTP/1.1 [400  Bad Request] ()
+2022-07-16 17:49:53 FINER RegisterHandler handle RETURN
+2022-07-16 17:49:53 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-16 17:49:54 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:49:54 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: GET / HTTP/1.1
+2022-07-16 17:49:54 FINER FileHandler handle ENTRY
+2022-07-16 17:49:54 FINE handlers.FileHandler handle Original urlPath: /
+2022-07-16 17:49:54 FINER handlers.FileHandler handle urlPath: /index.html
+2022-07-16 17:49:54 FINEST handlers.FileHandler handle filePath: web/index.html
+2022-07-16 17:49:54 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:49:54 FINE sun.net.httpserver.ServerImpl logReply GET / HTTP/1.1 [200  OK] ()
+2022-07-16 17:49:54 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-16 17:49:54 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:49:54 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: GET /css/main.css HTTP/1.1
+2022-07-16 17:49:54 FINER FileHandler handle ENTRY
+2022-07-16 17:49:54 FINER handlers.FileHandler handle urlPath: /css/main.css
+2022-07-16 17:49:54 FINEST handlers.FileHandler handle filePath: web/css/main.css
+2022-07-16 17:49:54 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:49:54 FINE sun.net.httpserver.ServerImpl logReply GET /css/main.css HTTP/1.1 [200  OK] ()
+2022-07-16 17:49:54 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-16 17:49:55 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:49:55 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: GET /favicon.ico HTTP/1.1
+2022-07-16 17:49:55 FINER FileHandler handle ENTRY
+2022-07-16 17:49:55 FINER handlers.FileHandler handle urlPath: /favicon.ico
+2022-07-16 17:49:55 FINEST handlers.FileHandler handle filePath: web/favicon.ico
+2022-07-16 17:49:55 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:49:55 FINE sun.net.httpserver.ServerImpl logReply GET /favicon.ico HTTP/1.1 [200  OK] ()
+2022-07-16 17:49:55 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-16 17:49:55 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:49:55 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: GET /favicon.ico HTTP/1.1
+2022-07-16 17:49:55 FINER FileHandler handle ENTRY
+2022-07-16 17:49:55 FINER handlers.FileHandler handle urlPath: /favicon.ico
+2022-07-16 17:49:55 FINEST handlers.FileHandler handle filePath: web/favicon.ico
+2022-07-16 17:49:55 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:49:55 FINE sun.net.httpserver.ServerImpl logReply GET /favicon.ico HTTP/1.1 [200  OK] ()
+2022-07-16 17:49:55 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-16 17:49:55 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:49:55 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: GET / HTTP/1.1
+2022-07-16 17:49:55 FINER FileHandler handle ENTRY
+2022-07-16 17:49:55 FINE handlers.FileHandler handle Original urlPath: /
+2022-07-16 17:49:55 FINER handlers.FileHandler handle urlPath: /index.html
+2022-07-16 17:49:55 FINEST handlers.FileHandler handle filePath: web/index.html
+2022-07-16 17:49:55 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:49:55 FINE sun.net.httpserver.ServerImpl logReply GET / HTTP/1.1 [200  OK] ()
+2022-07-16 17:49:55 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-16 17:49:55 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:49:55 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: GET /css/main.css HTTP/1.1
+2022-07-16 17:49:55 FINER FileHandler handle ENTRY
+2022-07-16 17:49:55 FINER handlers.FileHandler handle urlPath: /css/main.css
+2022-07-16 17:49:55 FINEST handlers.FileHandler handle filePath: web/css/main.css
+2022-07-16 17:49:55 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:49:55 FINE sun.net.httpserver.ServerImpl logReply GET /css/main.css HTTP/1.1 [200  OK] ()
+2022-07-16 17:49:55 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-16 17:49:56 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:49:56 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: GET /favicon.ico HTTP/1.1
+2022-07-16 17:49:56 FINER FileHandler handle ENTRY
+2022-07-16 17:49:56 FINER handlers.FileHandler handle urlPath: /favicon.ico
+2022-07-16 17:49:56 FINEST handlers.FileHandler handle filePath: web/favicon.ico
+2022-07-16 17:49:56 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:49:56 FINE sun.net.httpserver.ServerImpl logReply GET /favicon.ico HTTP/1.1 [200  OK] ()
+2022-07-16 17:49:56 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-16 17:49:56 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:49:56 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: GET /favicon.ico HTTP/1.1
+2022-07-16 17:49:56 FINER FileHandler handle ENTRY
+2022-07-16 17:49:56 FINER handlers.FileHandler handle urlPath: /favicon.ico
+2022-07-16 17:49:56 FINEST handlers.FileHandler handle filePath: web/favicon.ico
+2022-07-16 17:49:56 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:49:56 FINE sun.net.httpserver.ServerImpl logReply GET /favicon.ico HTTP/1.1 [200  OK] ()
+2022-07-16 17:49:56 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-16 17:49:59 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:49:59 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /clear HTTP/1.1
+2022-07-16 17:49:59 FINER ClearHandler handle ENTRY
+2022-07-16 17:49:59 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:49:59 FINE sun.net.httpserver.ServerImpl logReply POST /clear HTTP/1.1 [200  OK] ()
+2022-07-16 17:49:59 FINER ClearHandler handle RETURN
+2022-07-16 17:49:59 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-16 17:50:02 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:50:02 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/register HTTP/1.1
+2022-07-16 17:50:02 FINER RegisterHandler handle ENTRY
+2022-07-16 17:50:02 FINEST handlers.RegisterHandler handle /user/register
+2022-07-16 17:50:02 FINER RegisterService register ENTRY
+2022-07-16 17:50:02 FINER RegisterService register RETURN
+2022-07-16 17:50:02 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:50:02 FINE sun.net.httpserver.ServerImpl logReply POST /user/register HTTP/1.1 [200  OK] ()
+2022-07-16 17:50:02 FINER RegisterHandler handle RETURN
+2022-07-16 17:50:02 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-16 17:50:08 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-16 17:50:08 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/login HTTP/1.1
+2022-07-16 17:50:08 FINER LoginHandler handle ENTRY
+2022-07-16 17:50:08 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-16 17:50:08 FINE sun.net.httpserver.ServerImpl logReply POST /user/login HTTP/1.1 [200  OK] ()
+2022-07-16 17:50:08 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished

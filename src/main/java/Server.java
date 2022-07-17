@@ -1,8 +1,5 @@
 import com.sun.net.httpserver.HttpServer;
-import handlers.ClearHandler;
-import handlers.FileHandler;
-import handlers.LoginHandler;
-import handlers.RegisterHandler;
+import handlers.*;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -79,12 +76,12 @@ public class Server {
         // (e.g., web site files)
         server.createContext("/", new FileHandler());
         server.createContext("/clear", new ClearHandler());
-//        server.createContext("/load", new LoadHandler());
-//        server.createContext("/fill", new FillHandler());
+        server.createContext("/load", new LoadHandler());
+        server.createContext("/fill", new FillHandler());
         server.createContext("/user/register", new RegisterHandler());
         server.createContext("/user/login", new LoginHandler());
-//        server.createContext("/event", new EventHandler());
-//        server.createContext("person", new PersonHandler());
+        server.createContext("/event", new EventHandler());
+        server.createContext("person", new PersonHandler());
 
         logger.info("Starting server");
 

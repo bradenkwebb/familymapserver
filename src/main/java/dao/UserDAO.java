@@ -2,6 +2,7 @@ package dao;
 
 import model.User;
 import java.sql.*;
+import java.util.Objects;
 
 public class UserDAO {
     /**
@@ -81,7 +82,18 @@ public class UserDAO {
      * @throws DataAccessException if an error occurs
      */
     public boolean validate(String username, String password) throws DataAccessException{
-        //TODO implement me!
+        String sql = "SELECT * FROM Users WHERE username=?;";
+        ResultSet rs;
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                return password.equals(rs.getString("password"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new DataAccessException("Error occurred while validating user's credentials.");
+        }
         return false;
     }
 

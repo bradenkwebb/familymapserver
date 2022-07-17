@@ -40,5 +40,6 @@ public class ClearHandler implements Handler {
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, 0);
             exchange.getResponseBody().close();
         }
+        logger.exiting("ClearHandler", "handle");
     }
 }

@@ -21,17 +21,24 @@ public class RegisterHandler implements Handler {
         boolean success = false;
         try {
             String urlPath = exchange.getRequestURI().toString();
-            logger.fine(urlPath);
+            logger.finest(urlPath);
             if (exchange.getRequestMethod().toLowerCase().equals("post")) {
 
                 RegisterRequest registerRequest = (RegisterRequest) deserialize(exchange.getRequestBody(), RegisterRequest.class);
                 RegisterService service = new RegisterService();
                 RegisterResult result = service.register(registerRequest);
 
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+                success = result.isSuccess();
+
+                if (success) {
+                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+                } else {
+                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+                }
+
                 OutputStream responseBody = exchange.getResponseBody();
                 writeString(serialize(result), responseBody);
-                success = true;
+                exchange.getResponseBody().close();
             } else {
                 logger.info("Method failed");
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
@@ -41,10 +48,6 @@ public class RegisterHandler implements Handler {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             ex.printStackTrace();
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, 0);
-            exchange.getResponseBody().close();
-        }
-        if (!success) {
-            exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
             exchange.getResponseBody().close();
         }
         logger.exiting("RegisterHandler", "handle");

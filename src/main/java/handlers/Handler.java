@@ -10,6 +10,7 @@ import results.Result;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Logger;
 
 public interface Handler extends HttpHandler {
     default void writeString(String str, OutputStream os) throws IOException {

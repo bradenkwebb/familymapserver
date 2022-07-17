@@ -9,6 +9,7 @@ import results.RegisterResult;
 
 import javax.xml.crypto.Data;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,10 +34,14 @@ public class RegisterService implements Service {
      * @return
      */
     public RegisterResult register(RegisterRequest r) {
-        Database db = new Database();
-        try {
-            db.openConnection();
+        logger.entering("RegisterService", "register");
 
+        RegisterResult result = new RegisterResult();
+
+        Database db = new Database();
+        Connection conn = null;
+        try(Connection c = db.getConnection()){
+            conn = c;
             // Generate new personID, create User object, and add to database
             String generatedID = UUID.randomUUID().toString();
             User newUser = new User(r.getUsername(), r.getPassword(), r.getEmail(), r.getFirstName(),
@@ -52,7 +57,7 @@ public class RegisterService implements Service {
             new AuthTokenDAO(db.getConnection()).insert(newAuthToken);
 
             // Create result object
-            RegisterResult result = new RegisterResult();
+
             result.setSuccess(true);
             result.setAuthtoken(newAuthToken.getAuthtoken());
             result.setUsername(newUser.getUsername());
@@ -60,62 +65,19 @@ public class RegisterService implements Service {
 
             // Commit transaction and close the connection
             db.closeConnection(true);
-        } catch (DataAccessException ex) {
+
+            logger.exiting("RegisterService", "register");
+            return result;
+        } catch (DataAccessException | SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             ex.printStackTrace();
             db.closeConnection(false);
 
-            RegisterResult result = new RegisterResult();
             result.setSuccess(false);
             result.setMessage("Registration failed; " + ex.getMessage());
+
+            logger.exiting("RegisterService", "register");
             return result;
         }
-        return null;
-        /*
-        Database db = new Database();
-
-        Connection connection = null;
-        try(Connection c = db.getConnection()){
-            connection = c;
-
-            // Start a transaction
-            connection.setAutoCommit(false);
-            EventDAO eventDAO = new EventDAO(c);
-            eventDAO.clear();
-            eventDAO.insert(new Event("1", "bkwebb23", "2", 42.24f, 23.23f,
-                            "Slovakia", "Nitra", "Mission", 2018));
-
-            UserDAO userDAO = new UserDAO(c);
-            userDAO.clear();
-            userDAO.insert(new User("bkwebb23", "mypass", "bw@gmail.com",
-                    "Braden", "Webb", "m", "2"));
-
-            connection.commit();
-
-            Event myEvent = eventDAO.find("1");
-            System.out.println(myEvent.getAssociatedUsername());
-
-            User myUser = userDAO.find("bkwebb23");
-            System.out.println(myUser.getFirstName() + " " + myUser.getLastName());
-
-        }
-        catch(SQLException ex) {
-            try {
-                if (connection != null) {
-                    connection.rollback();
-                }
-            } catch (java.sql.SQLException ex1) {
-                System.out.println("This is the line that threw the exception!");
-                System.out.println(ex1.getMessage());
-            }
-
-            ex.printStackTrace();
-            System.out.println(ex.getMessage());
-
-        }
-        catch (DataAccessException e) {
-            throw new RuntimeException(e);
-        }
-         */
     }
 }
