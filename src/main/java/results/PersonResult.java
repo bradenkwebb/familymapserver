@@ -1,9 +1,23 @@
 package results;
 
+import model.Person;
+
 /**
  * An object representation of an HTTP /person/[personID] response body.
  */
-public class GetPersonResult extends Result {
+public class PersonResult extends Result {
+    /**
+     * The unique identifier for the person
+     */
+    private String personID;
+
+    public String getPersonID() {
+        return personID;
+    }
+
+    public void setPersonID(String personID) {
+        this.personID = personID;
+    }
 
     /**
      * The user with whom the obtained person is associated.
@@ -23,7 +37,7 @@ public class GetPersonResult extends Result {
     /**
      * The gender of the person.
      */
-    private char gender;
+    private String gender;
 
     /**
      * The personID of the person's father, if in the database.
@@ -43,8 +57,17 @@ public class GetPersonResult extends Result {
     /**
      * Creates the object.
      */
-    public GetPersonResult() {
-        // TODO implement this constructor
+    public PersonResult() {}
+
+    public PersonResult(Person person) {
+        this.personID = person.getPersonID();
+        this.associatedUsername = person.getAssociatedUsername();
+        this.firstName = person.getFirstName();
+        this.lastName = person.getLastName();
+        this.gender = person.getGender();
+        this.fatherID = person.getFatherID();
+        this.motherID = person.getMotherID();
+        this.spouseID = person.getSpouseID();
     }
 
     public String getAssociatedUsername() {
@@ -71,11 +94,11 @@ public class GetPersonResult extends Result {
         this.lastName = lastName;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 

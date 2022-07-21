@@ -35,6 +35,8 @@ public class User{
      */
     private String personID;
 
+    public User(){}
+
     /**
      * Creates a user.
      *

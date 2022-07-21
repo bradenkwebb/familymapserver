@@ -4,18 +4,18 @@ public class Result {
     /**
      * Whether or not the requested method attempt was successful.
      */
-    boolean isSuccess;
+    boolean success;
     /**
      * A message to display if an error occurs.
      */
     String message;
 
     public boolean isSuccess() {
-        return isSuccess;
+        return success;
     }
 
     public void setSuccess(boolean success) {
-        isSuccess = success;
+        this.success = success;
     }
 
     public String getMessage() {

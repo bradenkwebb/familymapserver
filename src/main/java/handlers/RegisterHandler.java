@@ -18,7 +18,11 @@ public class RegisterHandler implements Handler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         logger.entering("RegisterHandler", "handle");
-        boolean success = false;
+
+        RegisterResult result = new RegisterResult();
+        result.setSuccess(false);
+        int statusCode = HttpURLConnection.HTTP_BAD_REQUEST;
+
         try {
             String urlPath = exchange.getRequestURI().toString();
             logger.finest(urlPath);
@@ -26,30 +30,30 @@ public class RegisterHandler implements Handler {
 
                 RegisterRequest registerRequest = (RegisterRequest) deserialize(exchange.getRequestBody(), RegisterRequest.class);
                 RegisterService service = new RegisterService();
-                RegisterResult result = service.register(registerRequest);
+                result = service.register(registerRequest);
 
-                success = result.isSuccess();
-
-                if (success) {
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-                } else {
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+                if (result.isSuccess()) {
+                    statusCode = HttpURLConnection.HTTP_OK;
                 }
-
-                OutputStream responseBody = exchange.getResponseBody();
-                writeString(serialize(result), responseBody);
-                exchange.getResponseBody().close();
             } else {
-                logger.info("Method failed");
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
-                exchange.getResponseBody().close();
+                logger.info("Invalid request method");
+                statusCode = HttpURLConnection.HTTP_BAD_METHOD;
+                result.setSuccess(false);
+                result.setMessage("Error: Invalid request method");
             }
+
         } catch (IOException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             ex.printStackTrace();
-            exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, 0);
-            exchange.getResponseBody().close();
+            result.setSuccess(false);
+            result.setMessage("Error: Unable to parse JSON; likely either a request property is " +
+                             "missing or has invalid value");
         }
-        logger.exiting("RegisterHandler", "handle");
+
+
+        exchange.sendResponseHeaders(statusCode, 0);
+        OutputStream responseBody = exchange.getResponseBody();
+        writeString(serialize(result), responseBody);
+        exchange.getResponseBody().close();
     }
 }

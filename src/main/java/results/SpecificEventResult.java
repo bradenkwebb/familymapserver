@@ -1,9 +1,11 @@
 package results;
 
+import model.Event;
+
 /**
  * An object representation of an HTTP /event/[eventID] response body.
  */
-public class GetEventResult extends Result {
+public class SpecificEventResult extends Result {
 
     /**
      * The username associated with the event.
@@ -54,8 +56,17 @@ public class GetEventResult extends Result {
     /**
      * Creates the object.
      */
-    public GetEventResult() {
-        //TODO implement this constructor
+    public SpecificEventResult() {}
+    public SpecificEventResult(Event event) {
+        this.associatedUsername = event.getAssociatedUsername();
+        this.eventID = event.getEventID();
+        this.eventType = event.getEventType();
+        this.country = event.getCountry();
+        this.city = event.getCity();
+        this.latitude = event.getLatitude();
+        this.longitude = event.getLongitude();
+        this.personID = event.getPersonID();
+        this.year = event.getYear();
     }
 
     public String getAssociatedUsername() {

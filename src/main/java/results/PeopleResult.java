@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * An object representation of an HTTP /person response body.
  */
-public class GetAllPeopleResult extends Result {
+public class PeopleResult extends Result {
 
     /**
      * The list of Person objects obtained from the database in the user's family tree.
@@ -17,8 +17,9 @@ public class GetAllPeopleResult extends Result {
     /**
      * Creates the object.
      */
-    public GetAllPeopleResult() {
-        //TODO implement this constructor?
+    public PeopleResult() {}
+    public PeopleResult(List<Person> people) {
+        this.persons = people;
     }
 
     public List<Person> getPersons() {
