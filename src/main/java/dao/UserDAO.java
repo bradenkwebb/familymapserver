@@ -3,8 +3,11 @@ package dao;
 import model.User;
 import java.sql.*;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserDAO {
+    public static final Logger logger = Logger.getLogger("UserDAO");
     /**
      * The connection to the SQLite database.
      */
@@ -26,6 +29,7 @@ public class UserDAO {
      * @throws DataAccessException if an error occurs
      */
     public void insert(User user) throws DataAccessException {
+        logger.entering("UserDAO", "insert");
         String sql = "INSERT INTO Users (username, password, email, firstName," +
                      "lastName, gender, personID) VALUES(?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -37,10 +41,40 @@ public class UserDAO {
             stmt.setString(6, user.getGender());
             stmt.setString(7, user.getPersonID());
 
+            logger.finest(stmt.toString());
+
             stmt.executeUpdate();
+            logger.exiting("UserDAO", "insert");
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.exiting("UserDAO", "insert");
             throw new DataAccessException("Error encountered while inserting a user into the database");
+        }
+    }
+
+    public void update(User user) throws DataAccessException {
+        logger.entering("UserDAO", "insert");
+        String sql = "UPDATE Users " + "SET username = ?, password = ?, email = ?, firstName = ?, " +
+                     "lastName = ?, gender = ?, personID = ?" + "WHERE username = ?;";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getPassword());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getFirstName());
+            stmt.setString(5, user.getLastName());
+            stmt.setString(6, user.getGender());
+            stmt.setString(7, user.getPersonID());
+            stmt.setString(8, user.getUsername());
+
+            logger.finest(stmt.toString());
+
+            stmt.executeUpdate();
+            logger.exiting("UserDAO", "update");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            logger.log(Level.WARNING, ex.getMessage(), ex);
+            logger.exiting("UserDAO", "");
+            throw new DataAccessException("Error encountered when updating user in database");
         }
     }
 

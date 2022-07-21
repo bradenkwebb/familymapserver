@@ -80,4 +80,26 @@ public class EventDAOTest {
         // instance of the class in the first parameter, which in this case is a DataAccessException.
         assertThrows(DataAccessException.class, () -> eDao.insert(bestEvent));
     }
+
+    @Test
+    public void getAllFromUser() throws DataAccessException {
+        System.out.println("getAllFromUser() called.");
+
+        Event biking = new Event("Biking_123A", "Gale", "Gale123A",
+                35.9f, 140.1f, "Japan", "Ushiku",
+                "Biking_Around", 2016);
+        Event hiking = new Event("hiking123", "Gale", "Gale123A",
+                35.9f, 140.1f, "Japan", "Ushiku",
+                "hiking", 2016);
+        Event biking2 = new Event("Biking_123B", "braden", "Gale123A",
+                35.9f, 140.1f, "Japan", "Ushiku",
+                "Biking_Around", 2016);
+
+        eDao.insert(biking);
+        assertEquals(0, eDao.getAllFromUser("braden").size());
+        eDao.insert(biking2);
+        assertEquals(1, eDao.getAllFromUser("braden").size());
+        eDao.insert(hiking);
+        assertEquals(2, eDao.getAllFromUser("Gale").size());
+    }
 }

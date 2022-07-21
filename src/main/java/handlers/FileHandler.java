@@ -21,7 +21,7 @@ public class FileHandler implements Handler {
         boolean success = false;
 
         try {
-            if (exchange.getRequestMethod().toLowerCase().equals("get")) {
+            if (exchange.getRequestMethod().equalsIgnoreCase("get")) {
                 String urlPath = exchange.getRequestURI().toString();
                 if (urlPath == null || urlPath.equals("/")) {
                     logger.fine("Original urlPath: " + urlPath);

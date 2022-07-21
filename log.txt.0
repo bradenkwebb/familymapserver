@@ -1,39 +1,53 @@
-2022-07-16 18:18:19 INFO Server run Initializing HTTP Server
-2022-07-16 18:18:19 FINE sun.net.httpserver.ServerImpl <init> HttpServer created http 0.0.0.0/0.0.0.0:8080
-2022-07-16 18:18:19 INFO Server run Creating contexts
-2022-07-16 18:18:19 FINE sun.net.httpserver.ServerImpl createContext context created: /
-2022-07-16 18:18:19 FINE sun.net.httpserver.ServerImpl createContext context created: /clear
-2022-07-16 18:18:19 FINE sun.net.httpserver.ServerImpl createContext context created: /user/register
-2022-07-16 18:18:19 FINE sun.net.httpserver.ServerImpl createContext context created: /user/login
-2022-07-16 18:18:19 INFO Server run Starting server
-2022-07-16 18:18:19 INFO Server run Server started
-2022-07-16 18:18:33 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
-2022-07-16 18:18:33 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /clear HTTP/1.1
-2022-07-16 18:18:33 FINER ClearHandler handle ENTRY
-2022-07-16 18:18:34 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
-2022-07-16 18:18:34 FINE sun.net.httpserver.ServerImpl logReply POST /clear HTTP/1.1 [200  OK] ()
-2022-07-16 18:18:34 FINER ClearHandler handle RETURN
-2022-07-16 18:18:34 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
-2022-07-16 18:18:36 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
-2022-07-16 18:18:36 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/register HTTP/1.1
-2022-07-16 18:18:36 FINER RegisterHandler handle ENTRY
-2022-07-16 18:18:36 FINEST handlers.RegisterHandler handle /user/register
-2022-07-16 18:18:36 FINER RegisterService register ENTRY
-2022-07-16 18:18:36 FINER RegisterService register RETURN
-2022-07-16 18:18:36 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
-2022-07-16 18:18:36 FINE sun.net.httpserver.ServerImpl logReply POST /user/register HTTP/1.1 [200  OK] ()
-2022-07-16 18:18:36 FINER RegisterHandler handle RETURN
-2022-07-16 18:18:36 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
-2022-07-16 18:18:38 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
-2022-07-16 18:18:38 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/register HTTP/1.1
-2022-07-16 18:18:38 FINER RegisterHandler handle ENTRY
-2022-07-16 18:18:38 FINEST handlers.RegisterHandler handle /user/register
-2022-07-16 18:18:38 FINER RegisterService register ENTRY
-2022-07-16 18:18:38 SEVERE services.RegisterService register Error encountered while inserting a user into the database
-dao.DataAccessException: Error encountered while inserting a user into the database
-	at dao.UserDAO.insert(UserDAO.java:43)
-	at services.RegisterService.register(RegisterService.java:49)
-	at handlers.RegisterHandler.handle(RegisterHandler.java:29)
+2022-07-21 09:54:01 INFO Server run Initializing HTTP Server
+2022-07-21 09:54:01 FINE sun.net.httpserver.ServerImpl <init> HttpServer created http 0.0.0.0/0.0.0.0:8080
+2022-07-21 09:54:01 INFO Server run Creating contexts
+2022-07-21 09:54:01 FINE sun.net.httpserver.ServerImpl createContext context created: /
+2022-07-21 09:54:01 FINE sun.net.httpserver.ServerImpl createContext context created: /clear
+2022-07-21 09:54:01 FINE sun.net.httpserver.ServerImpl createContext context created: /load
+2022-07-21 09:54:01 FINE sun.net.httpserver.ServerImpl createContext context created: /fill
+2022-07-21 09:54:01 FINE sun.net.httpserver.ServerImpl createContext context created: /user/register
+2022-07-21 09:54:01 FINE sun.net.httpserver.ServerImpl createContext context created: /user/login
+2022-07-21 09:54:01 FINE sun.net.httpserver.ServerImpl createContext context created: /event
+2022-07-21 09:54:01 FINE sun.net.httpserver.ServerImpl createContext context created: /person
+2022-07-21 09:54:01 INFO Server run Starting server
+2022-07-21 09:54:01 INFO Server run Server started
+2022-07-21 09:54:05 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-21 09:54:05 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: GET /event/0b58eca1-99c3-498b-ac78-df8606e9d1f8 HTTP/1.1
+2022-07-21 09:54:05 FINER EventHandler handle ENTRY
+2022-07-21 09:54:05 FINER EventService getResult ENTRY
+2022-07-21 09:54:05 FINER EventDAO getAllFromUser ENTRY
+2022-07-21 09:54:05 FINER dao.EventDAO getAllFromUser SELECT * FROM Events WHERE associatedUsername = ?; 
+ parameters=[username]
+2022-07-21 09:54:05 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-21 09:54:05 FINE sun.net.httpserver.ServerImpl logReply GET /event/0b58eca1-99c3-498b-ac78-df8606e9d1f8 HTTP/1.1 [200  OK] ()
+2022-07-21 09:54:05 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-21 09:54:09 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-21 09:54:09 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: GET /event/0b58eca1-99c3-98b-ac78-df8606e9d1f8 HTTP/1.1
+2022-07-21 09:54:09 FINER EventHandler handle ENTRY
+2022-07-21 09:54:09 FINER EventService getResult ENTRY
+2022-07-21 09:54:09 FINER EventDAO getAllFromUser ENTRY
+2022-07-21 09:54:09 FINER dao.EventDAO getAllFromUser SELECT * FROM Events WHERE associatedUsername = ?; 
+ parameters=[username]
+2022-07-21 09:54:09 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-21 09:54:09 FINE sun.net.httpserver.ServerImpl logReply GET /event/0b58eca1-99c3-98b-ac78-df8606e9d1f8 HTTP/1.1 [500  Internal Server Error] ()
+2022-07-21 09:54:09 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-21 09:54:31 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-21 09:54:31 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/login HTTP/1.1
+2022-07-21 09:54:31 FINER LoginHandler handle ENTRY
+2022-07-21 09:54:31 FINER LoginService login ENTRY
+2022-07-21 09:54:31 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-21 09:54:31 FINE sun.net.httpserver.ServerImpl logReply POST /user/login HTTP/1.1 [200  OK] ()
+2022-07-21 09:54:31 FINER LoginHandler handle RETURN
+2022-07-21 09:54:31 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-21 09:54:37 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-21 09:54:37 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/login HTTP/1.1
+2022-07-21 09:54:37 FINER LoginHandler handle ENTRY
+2022-07-21 09:54:37 FINER sun.net.httpserver.ServerImpl$Exchange run ServerImpl.Exchange (4)
+com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: Unexpected value at line 2 column 14 path $.username
+	at com.google.gson.Gson.fromJson(Gson.java:947)
+	at com.google.gson.Gson.fromJson(Gson.java:870)
+	at handlers.Handler.deserialize(Handler.java:29)
+	at handlers.LoginHandler.handle(LoginHandler.java:34)
 	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
 	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
 	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
@@ -44,65 +58,46 @@ dao.DataAccessException: Error encountered while inserting a user into the datab
 	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:450)
 	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:416)
 	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: com.google.gson.stream.MalformedJsonException: Unexpected value at line 2 column 14 path $.username
+	at com.google.gson.stream.JsonReader.syntaxError(JsonReader.java:1564)
+	at com.google.gson.stream.JsonReader.doPeek(JsonReader.java:565)
+	at com.google.gson.stream.JsonReader.peek(JsonReader.java:426)
+	at com.google.gson.internal.bind.TypeAdapters$16.read(TypeAdapters.java:393)
+	at com.google.gson.internal.bind.TypeAdapters$16.read(TypeAdapters.java:390)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$1.read(ReflectiveTypeAdapterFactory.java:131)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:222)
+	at com.google.gson.Gson.fromJson(Gson.java:932)
+	... 13 more
 
-2022-07-16 18:18:38 FINER RegisterService register RETURN
-2022-07-16 18:18:38 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
-2022-07-16 18:18:38 FINE sun.net.httpserver.ServerImpl logReply POST /user/register HTTP/1.1 [400  Bad Request] ()
-2022-07-16 18:18:38 FINER RegisterHandler handle RETURN
-2022-07-16 18:18:38 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
-2022-07-16 18:18:41 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
-2022-07-16 18:18:41 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/login HTTP/1.1
-2022-07-16 18:18:41 FINER LoginHandler handle ENTRY
-2022-07-16 18:18:41 FINER LoginService login ENTRY
-2022-07-16 18:18:41 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
-2022-07-16 18:18:41 FINE sun.net.httpserver.ServerImpl logReply POST /user/login HTTP/1.1 [200  OK] ()
-2022-07-16 18:18:41 FINER LoginHandler handle RETURN
-2022-07-16 18:18:41 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
-2022-07-16 18:18:47 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
-2022-07-16 18:18:47 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/login HTTP/1.1
-2022-07-16 18:18:47 FINER LoginHandler handle ENTRY
-2022-07-16 18:18:47 FINER LoginService login ENTRY
-2022-07-16 18:18:47 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
-2022-07-16 18:18:47 FINE sun.net.httpserver.ServerImpl logReply POST /user/login HTTP/1.1 [200  OK] ()
-2022-07-16 18:18:47 FINER LoginHandler handle RETURN
-2022-07-16 18:18:47 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
-2022-07-16 18:18:49 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
-2022-07-16 18:18:49 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/login HTTP/1.1
-2022-07-16 18:18:49 FINER LoginHandler handle ENTRY
-2022-07-16 18:18:49 FINER LoginService login ENTRY
-2022-07-16 18:18:49 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
-2022-07-16 18:18:49 FINE sun.net.httpserver.ServerImpl logReply POST /user/login HTTP/1.1 [200  OK] ()
-2022-07-16 18:18:49 FINER LoginHandler handle RETURN
-2022-07-16 18:18:49 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
-2022-07-16 18:18:50 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
-2022-07-16 18:18:50 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/login HTTP/1.1
-2022-07-16 18:18:50 FINER LoginHandler handle ENTRY
-2022-07-16 18:18:50 FINER LoginService login ENTRY
-2022-07-16 18:18:50 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
-2022-07-16 18:18:50 FINE sun.net.httpserver.ServerImpl logReply POST /user/login HTTP/1.1 [200  OK] ()
-2022-07-16 18:18:50 FINER LoginHandler handle RETURN
-2022-07-16 18:18:50 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
-2022-07-16 18:18:51 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
-2022-07-16 18:18:51 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/login HTTP/1.1
-2022-07-16 18:18:51 FINER LoginHandler handle ENTRY
-2022-07-16 18:18:51 FINER LoginService login ENTRY
-2022-07-16 18:18:51 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
-2022-07-16 18:18:51 FINE sun.net.httpserver.ServerImpl logReply POST /user/login HTTP/1.1 [200  OK] ()
-2022-07-16 18:18:51 FINER LoginHandler handle RETURN
-2022-07-16 18:18:51 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
-2022-07-16 18:19:08 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
-2022-07-16 18:19:08 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/login HTTP/1.1
-2022-07-16 18:19:08 FINER LoginHandler handle ENTRY
-2022-07-16 18:19:08 FINER LoginService login ENTRY
-2022-07-16 18:19:08 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
-2022-07-16 18:19:08 FINE sun.net.httpserver.ServerImpl logReply POST /user/login HTTP/1.1 [400  Bad Request] ()
-2022-07-16 18:19:08 FINER LoginHandler handle RETURN
-2022-07-16 18:19:08 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
-2022-07-16 18:19:19 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
-2022-07-16 18:19:19 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /clear HTTP/1.1
-2022-07-16 18:19:19 FINER ClearHandler handle ENTRY
-2022-07-16 18:19:19 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
-2022-07-16 18:19:19 FINE sun.net.httpserver.ServerImpl logReply POST /clear HTTP/1.1 [200  OK] ()
-2022-07-16 18:19:19 FINER ClearHandler handle RETURN
-2022-07-16 18:19:19 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
-2022-07-16 18:19:49 FINER sun.net.httpserver.HttpConnection close Closing connection: java.nio.channels.SocketChannel[connected local=/[0:0:0:0:0:0:0:1]:8080 remote=/[0:0:0:0:0:0:0:1]:52206]
+2022-07-21 09:54:37 FINER sun.net.httpserver.HttpConnection close Closing connection: java.nio.channels.SocketChannel[connected local=/[0:0:0:0:0:0:0:1]:8080 remote=/[0:0:0:0:0:0:0:1]:52676]
+2022-07-21 09:54:37 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-21 09:54:37 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/login HTTP/1.1
+2022-07-21 09:54:37 FINER LoginHandler handle ENTRY
+2022-07-21 09:54:37 FINER sun.net.httpserver.ServerImpl$Exchange run ServerImpl.Exchange (4)
+com.google.gson.JsonSyntaxException: com.google.gson.stream.MalformedJsonException: Unexpected value at line 2 column 14 path $.username
+	at com.google.gson.Gson.fromJson(Gson.java:947)
+	at com.google.gson.Gson.fromJson(Gson.java:870)
+	at handlers.Handler.deserialize(Handler.java:29)
+	at handlers.LoginHandler.handle(LoginHandler.java:34)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:736)
+	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:703)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:162)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:450)
+	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:416)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: com.google.gson.stream.MalformedJsonException: Unexpected value at line 2 column 14 path $.username
+	at com.google.gson.stream.JsonReader.syntaxError(JsonReader.java:1564)
+	at com.google.gson.stream.JsonReader.doPeek(JsonReader.java:565)
+	at com.google.gson.stream.JsonReader.peek(JsonReader.java:426)
+	at com.google.gson.internal.bind.TypeAdapters$16.read(TypeAdapters.java:393)
+	at com.google.gson.internal.bind.TypeAdapters$16.read(TypeAdapters.java:390)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$1.read(ReflectiveTypeAdapterFactory.java:131)
+	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:222)
+	at com.google.gson.Gson.fromJson(Gson.java:932)
+	... 13 more
+
+2022-07-21 09:54:37 FINER sun.net.httpserver.HttpConnection close Closing connection: java.nio.channels.SocketChannel[connected local=/[0:0:0:0:0:0:0:1]:8080 remote=/[0:0:0:0:0:0:0:1]:52764]

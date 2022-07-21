@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * An object representation of an HTTP /event response body.
  */
-public class GetAllEventsResult extends Result {
+public class AllEventsResult extends Result {
     /**
      * A JSON array containing all of the event objects from the user's family tree.
      */
@@ -16,8 +16,9 @@ public class GetAllEventsResult extends Result {
     /**
      * Creates the object.
      */
-    public GetAllEventsResult() {
-        //TODO implement this constructor
+    public AllEventsResult() {}
+    public AllEventsResult(List<Event> events) {
+        this.data = events;
     }
 
     public List<Event> getData() {

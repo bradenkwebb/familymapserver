@@ -10,6 +10,8 @@ import results.RegisterResult;
 import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,36 +39,45 @@ public class RegisterService implements Service {
         logger.entering("RegisterService", "register");
 
         RegisterResult result = new RegisterResult();
-
         Database db = new Database();
         Connection conn = null;
+
         try(Connection c = db.getConnection()){
             conn = c;
-            // Generate new personID, create User object, and add to database
-            String generatedID = UUID.randomUUID().toString();
-            User newUser = new User(r.getUsername(), r.getPassword(), r.getEmail(), r.getFirstName(),
-                    r.getLastName(), r.getGender(), generatedID);
-            new UserDAO(db.getConnection()).insert(newUser);
 
-            // Create new Person object, and add to database
-            Person newPerson = new Person(generatedID, r.getUsername(), r.getFirstName(), r.getLastName(), r.getGender());
-            new PersonDAO(db.getConnection()).insert(newPerson);
+            PersonDAO pDao = new PersonDAO(conn);
+            UserDAO uDao = new UserDAO(conn);
+            AuthTokenDAO aDao = new AuthTokenDAO(conn);
 
-            // Generate new AuthToken object and add to database
-            AuthToken newAuthToken = new AuthToken(UUID.randomUUID().toString(), r.getUsername());
-            new AuthTokenDAO(db.getConnection()).insert(newAuthToken);
+            if (!checkNotNull(r)) {
+                result.setSuccess(false);
+                result.setMessage("Error: missing or null field");
+            } else if (uDao.find(r.getUsername()) != null) {
+                result.setSuccess(false);
+                result.setMessage("Error: Username already taken");
+            } else if (!r.getGender().equalsIgnoreCase("m") && !r.getGender().equalsIgnoreCase("f")) {
+                result.setSuccess(false);
+                result.setMessage("Error: Gender field must be either \"f\" or \"m\"");
+            } else {
 
-            // Create result object
+                User user = new User(r.getUsername(), r.getPassword(), r.getEmail(), r.getFirstName(),
+                        r.getLastName(), r.getGender(), UUID.randomUUID().toString());
 
-            result.setSuccess(true);
-            result.setAuthtoken(newAuthToken.getAuthtoken());
-            result.setUsername(newUser.getUsername());
-            result.setPersonID(newUser.getPersonID());
+                uDao.insert(user);
 
-            // Commit transaction and close the connection
-            db.closeConnection(true);
+                // I'm not sure whether or not I still need to update the person ID for the user
+                Person person = pDao.generate(user, 4);
 
-            logger.exiting("RegisterService", "register");
+                AuthToken token = new AuthToken(UUID.randomUUID().toString(), r.getUsername());
+                aDao.insert(token);
+
+                result.setSuccess(true);
+                result.setAuthtoken(token.getAuthtoken());
+                result.setUsername(user.getUsername());
+                result.setPersonID(person.getPersonID());
+            }
+                // Commit transaction and close the connection
+                db.closeConnection(true);
             return result;
         } catch (DataAccessException | SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
@@ -75,9 +86,25 @@ public class RegisterService implements Service {
 
             result.setSuccess(false);
             result.setMessage("Registration failed; " + ex.getMessage());
-
-            logger.exiting("RegisterService", "register");
-            return result;
         }
+        return result;
+    }
+
+    private boolean checkNotNull(RegisterRequest r) {
+        HashSet<String> requestFields = new HashSet<>();
+        requestFields.add(r.getUsername());
+        requestFields.add(r.getPassword());
+        requestFields.add(r.getEmail());
+        requestFields.add(r.getFirstName());
+        requestFields.add(r.getLastName());
+        requestFields.add(r.getGender());
+
+        for (String field : requestFields) {
+            if (field == null) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
