@@ -1,5 +1,6 @@
 package handlers;
 
+import com.google.gson.stream.MalformedJsonException;
 import com.sun.net.httpserver.HttpExchange;
 import requests.RegisterRequest;
 import results.RegisterResult;

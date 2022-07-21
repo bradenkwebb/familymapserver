@@ -19,7 +19,6 @@ import java.util.logging.Logger;
 public class LoadService implements Service {
     public static final Logger logger = Logger.getLogger("LoadService");
 
-
     /**
      * Creates the object.
      */
@@ -59,6 +58,8 @@ public class LoadService implements Service {
             return result;
         } catch(DataAccessException | SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
+            result.setSuccess(false);
+            result.setMessage("Error: " + ex.getMessage() + "; likely due to invalid request");
             db.closeConnection(false);
         }
         return result;

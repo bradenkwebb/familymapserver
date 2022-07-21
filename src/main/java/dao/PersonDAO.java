@@ -154,7 +154,8 @@ public class PersonDAO {
             while (rs.next()) {
                 family.add(new Person(rs.getString("personID"), rs.getString("associatedUsername"),
                         rs.getString("firstName"), rs.getString("lastName"),
-                        rs.getString("gender")));
+                        rs.getString("gender"), rs.getString("fatherID"),
+                        rs.getString("motherID"), rs.getString("spouseID")));
             }
             return family;
         } catch (SQLException ex) {

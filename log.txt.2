@@ -1,38 +1,67 @@
-2022-07-21 09:48:53 INFO Server run Initializing HTTP Server
-2022-07-21 09:48:53 FINE sun.net.httpserver.ServerImpl <init> HttpServer created http 0.0.0.0/0.0.0.0:8080
-2022-07-21 09:48:53 INFO Server run Creating contexts
-2022-07-21 09:48:53 FINE sun.net.httpserver.ServerImpl createContext context created: /
-2022-07-21 09:48:53 FINE sun.net.httpserver.ServerImpl createContext context created: /clear
-2022-07-21 09:48:53 FINE sun.net.httpserver.ServerImpl createContext context created: /load
-2022-07-21 09:48:53 FINE sun.net.httpserver.ServerImpl createContext context created: /fill
-2022-07-21 09:48:53 FINE sun.net.httpserver.ServerImpl createContext context created: /user/register
-2022-07-21 09:48:53 FINE sun.net.httpserver.ServerImpl createContext context created: /user/login
-2022-07-21 09:48:53 FINE sun.net.httpserver.ServerImpl createContext context created: /event
-2022-07-21 09:48:53 FINE sun.net.httpserver.ServerImpl createContext context created: /person
-2022-07-21 09:48:53 INFO Server run Starting server
-2022-07-21 09:48:53 INFO Server run Server started
-2022-07-21 09:48:56 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
-2022-07-21 09:48:56 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/register HTTP/1.1
-2022-07-21 09:48:56 FINER RegisterHandler handle ENTRY
-2022-07-21 09:48:56 FINEST handlers.RegisterHandler handle /user/register
-2022-07-21 09:48:56 FINER RegisterService register ENTRY
-2022-07-21 09:49:58 FINER UserDAO insert ENTRY
-2022-07-21 09:49:58 FINEST dao.UserDAO insert INSERT INTO Users (username, password, email, firstName,lastName, gender, personID) VALUES(?, ?, ?, ?, ?, ?, ?) 
- parameters=[username, password, email, firstname, lastname, m, a1881487-1a39-440d-b7e5-12db6108f50c]
-2022-07-21 09:49:58 FINER UserDAO insert RETURN
-2022-07-21 09:49:58 SEVERE services.RegisterService register Error encountered while inserting a user into the database
-dao.DataAccessException: Error encountered while inserting a user into the database
-	at dao.UserDAO.insert(UserDAO.java:51)
-	at services.RegisterService.register(RegisterService.java:66)
-	at handlers.RegisterHandler.handle(RegisterHandler.java:33)
-	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
-	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
-	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
-	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:736)
-	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
-	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:703)
-	at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:162)
-	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:450)
-	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:416)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-
+2022-07-21 17:17:28 INFO Server run Initializing HTTP Server
+2022-07-21 17:17:28 FINE sun.net.httpserver.ServerImpl <init> HttpServer created http 0.0.0.0/0.0.0.0:8080
+2022-07-21 17:17:28 INFO Server run Creating contexts
+2022-07-21 17:17:28 FINE sun.net.httpserver.ServerImpl createContext context created: /
+2022-07-21 17:17:28 FINE sun.net.httpserver.ServerImpl createContext context created: /clear
+2022-07-21 17:17:28 FINE sun.net.httpserver.ServerImpl createContext context created: /load
+2022-07-21 17:17:28 FINE sun.net.httpserver.ServerImpl createContext context created: /fill
+2022-07-21 17:17:28 FINE sun.net.httpserver.ServerImpl createContext context created: /user/register
+2022-07-21 17:17:28 FINE sun.net.httpserver.ServerImpl createContext context created: /user/login
+2022-07-21 17:17:28 FINE sun.net.httpserver.ServerImpl createContext context created: /event
+2022-07-21 17:17:28 FINE sun.net.httpserver.ServerImpl createContext context created: /person
+2022-07-21 17:17:28 INFO Server run Starting server
+2022-07-21 17:17:28 INFO Server run Server started
+2022-07-21 17:17:31 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-21 17:17:31 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /clear HTTP/1.1
+2022-07-21 17:17:31 FINER ClearHandler handle ENTRY
+2022-07-21 17:17:31 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-21 17:17:31 FINE sun.net.httpserver.ServerImpl logReply POST /clear HTTP/1.1 [200  OK] ()
+2022-07-21 17:17:31 FINER ClearHandler handle RETURN
+2022-07-21 17:17:31 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-21 17:17:31 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-21 17:17:31 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /load HTTP/1.1
+2022-07-21 17:17:31 FINER LoadHandler handl ENTRY
+2022-07-21 17:17:31 FINER UserDAO insert ENTRY
+2022-07-21 17:17:31 FINEST dao.UserDAO insert INSERT INTO Users (username, password, email, firstName,lastName, gender, personID) VALUES(?, ?, ?, ?, ?, ?, ?) 
+ parameters=[sheila, parker, sheila@parker.com, Sheila, Parker, f, Sheila_Parker]
+2022-07-21 17:17:31 FINER UserDAO insert RETURN
+2022-07-21 17:17:31 FINER UserDAO insert ENTRY
+2022-07-21 17:17:31 FINEST dao.UserDAO insert INSERT INTO Users (username, password, email, firstName,lastName, gender, personID) VALUES(?, ?, ?, ?, ?, ?, ?) 
+ parameters=[patrick, spencer, patrick@spencer.com, Patrick, Spencer, m, Patrick_Spencer]
+2022-07-21 17:17:31 FINER UserDAO insert RETURN
+2022-07-21 17:17:31 FINER PersonDAO insert ENTRY
+2022-07-21 17:17:31 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[Sheila_Parker, sheila, Sheila, Parker, f, Betty_White, Blaine_McGary, Davis_Hyer]
+2022-07-21 17:17:31 FINER PersonDAO insert ENTRY
+2022-07-21 17:17:31 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[Davis_Hyer, sheila, Davis, Hyer, m, null, null, Sheila_Parker]
+2022-07-21 17:17:31 FINER PersonDAO insert ENTRY
+2022-07-21 17:17:31 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[Blaine_McGary, sheila, Blaine, McGary, m, Mrs_Rodham, Ken_Rodham, Betty_White]
+2022-07-21 17:17:31 FINER PersonDAO insert ENTRY
+2022-07-21 17:17:31 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[Betty_White, sheila, Betty, White, f, Mrs_Jones, Frank_Jones, Blaine_McGary]
+2022-07-21 17:17:31 FINER PersonDAO insert ENTRY
+2022-07-21 17:17:31 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[Ken_Rodham, sheila, Ken, Rodham, m, null, null, Mrs_Rodham]
+2022-07-21 17:17:31 FINER PersonDAO insert ENTRY
+2022-07-21 17:17:31 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[Mrs_Rodham, sheila, Mrs, Rodham, f, null, null, Ken_Rodham]
+2022-07-21 17:17:31 FINER PersonDAO insert ENTRY
+2022-07-21 17:17:31 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[Frank_Jones, sheila, Frank, Jones, m, null, null, Mrs_Jones]
+2022-07-21 17:17:31 FINER PersonDAO insert ENTRY
+2022-07-21 17:17:31 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[Mrs_Jones, sheila, Mrs, Jones, f, null, null, Frank_Jones]
+2022-07-21 17:17:31 FINER PersonDAO insert ENTRY
+2022-07-21 17:17:31 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[Patrick_Spencer, patrick, Patrick, Spencer, m, Golden_Boy, Happy_Birthday, null]
+2022-07-21 17:17:31 FINER PersonDAO insert ENTRY
+2022-07-21 17:17:31 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[Happy_Birthday, patrick, Patrick, Wilson, m, null, null, Golden_Boy]
+2022-07-21 17:17:31 FINER PersonDAO insert ENTRY
+2022-07-21 17:17:31 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[Golden_Boy, patrick, Spencer, Seeger, f, null, null, Happy_Birthday]
+2022-07-21 17:17:31 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-21 17:17:31 FINE sun.net.httpserver.ServerImpl logReply POST /load HTTP/1.1 [200  OK] ()
+2022-07-21 17:17:31 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished

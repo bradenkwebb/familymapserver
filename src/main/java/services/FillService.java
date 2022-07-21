@@ -43,37 +43,44 @@ public class FillService implements Service {
             UserDAO uDao = new UserDAO(conn);
             PersonDAO pDao = new PersonDAO(conn);
             EventDAO eDao = new EventDAO(conn);
-            AuthTokenDAO aDao = new AuthTokenDAO(conn);
 
             pDao.clearUser(username);
+            eDao.clearUser(username);
             User currUser  = uDao.find(username);
-            Person userPerson = pDao.generate(currUser, generations);
-//            Person userPerson = pDao.generate(username, uDao.find(username).getGender(), generations);
-//            User currUser  = uDao.find(username);
-            currUser.setPersonID(userPerson.getPersonID());
-            currUser.setFirstName(userPerson.getFirstName());
-            currUser.setLastName(userPerson.getLastName());
-            currUser.setGender(userPerson.getGender());
-            uDao.update(currUser);
+            if (currUser == null) {
+                result.setSuccess(false);
+                result.setMessage("Error: Invalid username");
+            } else if (!validNumGen(generations)) {
+                result.setSuccess(false);
+                result.setMessage("Error: Invalid generations parameter");
+            } else {
+                Person userPerson = pDao.generate(currUser, generations);
 
-            int personCount = pDao.famSize(currUser.getUsername());
-            int eventCount = eDao.getAllFromUser(currUser.getUsername()).size();
+                currUser.setPersonID(userPerson.getPersonID());
+                currUser.setFirstName(userPerson.getFirstName());
+                currUser.setLastName(userPerson.getLastName());
+                currUser.setGender(userPerson.getGender());
+                uDao.update(currUser);
+
+                int personCount = pDao.famSize(currUser.getUsername());
+                int eventCount = eDao.getAllFromUser(currUser.getUsername()).size();
+
+                result.setMessage("Successfully added " + personCount + " persons and " +
+                        eventCount + " events to the database.");
+                result.setSuccess(true);
+            }
 
             db.closeConnection(true);
 
-            result.setMessage("Successfully added " + personCount + " new persons and " +
-                                eventCount + " events to the database.");
-            result.setSuccess(true);
-
-            logger.exiting("FillService", "fill");
-            return result;
         } catch (DataAccessException | SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             db.closeConnection(false);
             result.setMessage("Error: " + ex.getMessage());
             result.setSuccess(false);
-            logger.exiting("FillService", "fill");
-            return result;
         }
+        return result;
+    }
+    private boolean validNumGen(int numGen) {
+        return numGen >= 0;
     }
 }

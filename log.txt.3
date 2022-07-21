@@ -1,330 +1,336 @@
-2022-07-21 09:47:30 INFO Server run Initializing HTTP Server
-2022-07-21 09:47:30 FINE sun.net.httpserver.ServerImpl <init> HttpServer created http 0.0.0.0/0.0.0.0:8080
-2022-07-21 09:47:30 INFO Server run Creating contexts
-2022-07-21 09:47:30 FINE sun.net.httpserver.ServerImpl createContext context created: /
-2022-07-21 09:47:30 FINE sun.net.httpserver.ServerImpl createContext context created: /clear
-2022-07-21 09:47:30 FINE sun.net.httpserver.ServerImpl createContext context created: /load
-2022-07-21 09:47:30 FINE sun.net.httpserver.ServerImpl createContext context created: /fill
-2022-07-21 09:47:30 FINE sun.net.httpserver.ServerImpl createContext context created: /user/register
-2022-07-21 09:47:30 FINE sun.net.httpserver.ServerImpl createContext context created: /user/login
-2022-07-21 09:47:30 FINE sun.net.httpserver.ServerImpl createContext context created: /event
-2022-07-21 09:47:30 FINE sun.net.httpserver.ServerImpl createContext context created: /person
-2022-07-21 09:47:30 INFO Server run Starting server
-2022-07-21 09:47:30 INFO Server run Server started
-2022-07-21 09:47:42 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
-2022-07-21 09:47:42 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /clear HTTP/1.1
-2022-07-21 09:47:42 FINER ClearHandler handle ENTRY
-2022-07-21 09:47:42 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
-2022-07-21 09:47:42 FINE sun.net.httpserver.ServerImpl logReply POST /clear HTTP/1.1 [200  OK] ()
-2022-07-21 09:47:42 FINER ClearHandler handle RETURN
-2022-07-21 09:47:42 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
-2022-07-21 09:47:46 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
-2022-07-21 09:47:46 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/register HTTP/1.1
-2022-07-21 09:47:46 FINER RegisterHandler handle ENTRY
-2022-07-21 09:47:46 FINEST handlers.RegisterHandler handle /user/register
-2022-07-21 09:47:46 FINER RegisterService register ENTRY
-2022-07-21 09:47:46 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
-2022-07-21 09:47:46 FINE sun.net.httpserver.ServerImpl logReply POST /user/register HTTP/1.1 [400  Bad Request] ()
-2022-07-21 09:47:46 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
-2022-07-21 09:47:51 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
-2022-07-21 09:47:51 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/register HTTP/1.1
-2022-07-21 09:47:51 FINER RegisterHandler handle ENTRY
-2022-07-21 09:47:51 FINEST handlers.RegisterHandler handle /user/register
-2022-07-21 09:47:51 FINER RegisterService register ENTRY
-2022-07-21 09:47:51 FINER UserDAO insert ENTRY
-2022-07-21 09:47:51 FINEST dao.UserDAO insert INSERT INTO Users (username, password, email, firstName,lastName, gender, personID) VALUES(?, ?, ?, ?, ?, ?, ?) 
- parameters=[username, password, email, firstname, lastname, m, a950485a-c5f4-485e-a555-c87785b2dab7]
-2022-07-21 09:47:51 FINER UserDAO insert RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[554f60f7-bd69-41d8-a994-345c82a6af42, username, Ila, Nigro, f, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[59222ee2-fb27-407d-b205-d5574359673c, username, Seeger, Broman, m, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER EventDAO generateMarriage ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[20562b58-9de5-420d-bfc9-da7e41a68ee1, username, Spencer, Darner, f, 554f60f7-bd69-41d8-a994-345c82a6af42, 59222ee2-fb27-407d-b205-d5574359673c, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[999f71c3-2886-4750-85c2-0fb57ebc1225, username, Jolynn, Zieman, f, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[3a34a567-6f82-4cf4-835c-1e0f02caa263, username, Augustine, Mcpheeters, m, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER EventDAO generateMarriage ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[554d07a2-d36e-4c3a-a07d-2b757a4762aa, username, Bruce, Blo, m, 999f71c3-2886-4750-85c2-0fb57ebc1225, 3a34a567-6f82-4cf4-835c-1e0f02caa263, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER EventDAO generateMarriage ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[50463221-07ce-40d4-b117-c89a93c0f8c1, username, Lucy, Mandelbaum, f, 20562b58-9de5-420d-bfc9-da7e41a68ee1, 554d07a2-d36e-4c3a-a07d-2b757a4762aa, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[1eddf3f0-8666-479a-b26c-0568c54fed40, username, Karie, Silverman, f, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[5a1b61a2-f26d-45ee-a918-2c9dc744a2bc, username, Sidney, Favreau, m, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER EventDAO generateMarriage ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[9101831b-0493-48a1-bdb7-4f3a9a7d489e, username, Sharon, Wasinger, f, 1eddf3f0-8666-479a-b26c-0568c54fed40, 5a1b61a2-f26d-45ee-a918-2c9dc744a2bc, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[4c5e5aea-4266-4ef4-a1a3-152452c02c31, username, Doloris, Ivie, f, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[1405c1fa-a578-447a-9b38-e3b24157ea47, username, Fabian, Stehlik, m, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER EventDAO generateMarriage ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[3e9edd56-1a36-4229-87f4-0cccb53bf6c7, username, Tyler, Livingston, m, 4c5e5aea-4266-4ef4-a1a3-152452c02c31, 1405c1fa-a578-447a-9b38-e3b24157ea47, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER EventDAO generateMarriage ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[f91ca5ae-7455-4faf-9b66-1ac34ab29ed1, username, Lawrence, Lazaro, m, 9101831b-0493-48a1-bdb7-4f3a9a7d489e, 3e9edd56-1a36-4229-87f4-0cccb53bf6c7, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER EventDAO generateMarriage ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[bfd9897d-4bc9-4615-8c97-2e67db033f2c, username, Vernetta, Meuser, f, 50463221-07ce-40d4-b117-c89a93c0f8c1, f91ca5ae-7455-4faf-9b66-1ac34ab29ed1, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[49105321-e4d3-494f-a104-712b985f2bc2, username, Charmain, Mitten, f, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[2ccf2d7a-68b5-413f-87f3-528f057d2d5d, username, Chi, Redmond, m, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER EventDAO generateMarriage ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[5d427a5c-8153-49ca-91f9-dab8de70cf24, username, Madge, Simington, f, 49105321-e4d3-494f-a104-712b985f2bc2, 2ccf2d7a-68b5-413f-87f3-528f057d2d5d, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[f17831bb-cf56-4bd3-9e69-94b936ffc17d, username, Chan, Line, f, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[546a910b-1bd1-4f80-9c58-dcfe157841e5, username, Hal, Schill, m, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER EventDAO generateMarriage ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[3b9ec3e5-8686-4955-a132-0262a1622ea1, username, Ezra, Pleasant, m, f17831bb-cf56-4bd3-9e69-94b936ffc17d, 546a910b-1bd1-4f80-9c58-dcfe157841e5, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER EventDAO generateMarriage ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[00446cf0-9b28-4adc-954b-649c0fb7d5b2, username, Tenesha, Mandelbaum, f, 5d427a5c-8153-49ca-91f9-dab8de70cf24, 3b9ec3e5-8686-4955-a132-0262a1622ea1, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[2b055fb5-8efe-469d-9c65-312b78ebaf58, username, Shae, Emory, f, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[c0d2c4c1-0f79-4449-ad2a-892f1f3e6f5f, username, Freddie, Caffee, m, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER EventDAO generateMarriage ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[8df5275c-4c56-47df-bbbb-63cf5662a9db, username, Arletta, Pera, f, 2b055fb5-8efe-469d-9c65-312b78ebaf58, c0d2c4c1-0f79-4449-ad2a-892f1f3e6f5f, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[2d0098ca-9dd4-413f-bdc5-aa7e167c35cb, username, Magaly, Bleich, f, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER PersonDAO generate ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[3d1e2305-36b2-49ab-acf8-7cce0476ddf7, username, Chauncey, Woosley, m, null, null, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER EventDAO generateMarriage ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[1ba6797b-d7f5-4f90-b674-61f1a076c1f3, username, Larry, Mcpeek, m, 2d0098ca-9dd4-413f-bdc5-aa7e167c35cb, 3d1e2305-36b2-49ab-acf8-7cce0476ddf7, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER EventDAO generateMarriage ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[cabead60-5ceb-43f9-9afd-b3c7703cae1c, username, Larry, Cardiel, m, 8df5275c-4c56-47df-bbbb-63cf5662a9db, 1ba6797b-d7f5-4f90-b674-61f1a076c1f3, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER EventDAO generateMarriage ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[d7081f08-0188-422b-9780-d4d9beaa343a, username, Elijah, Turck, m, 00446cf0-9b28-4adc-954b-649c0fb7d5b2, cabead60-5ceb-43f9-9afd-b3c7703cae1c, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINER EventDAO generateMarriage ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO getBirthYear ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER EventDAO generateDeath ENTRY
-2022-07-21 09:47:51 FINER EventDAO getAllFromPerson ENTRY
-2022-07-21 09:47:51 FINER PersonDAO insert ENTRY
-2022-07-21 09:47:51 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
- parameters=[6db3470d-28df-48bc-8ae8-8a4d3defa184, username, Davis, Clear, m, bfd9897d-4bc9-4615-8c97-2e67db033f2c, d7081f08-0188-422b-9780-d4d9beaa343a, null]
-2022-07-21 09:47:51 FINER PersonDAO generate RETURN
-2022-07-21 09:47:51 FINEST dao.PersonDAO updatePersonByID UPDATE Persons SET personID = ?, associatedUsername = ?, firstName = ?, lastName = ?, gender = ?, motherID = ?, fatherID = ?, spouseID = ? WHERE personID = ?
-2022-07-21 09:47:51 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
-2022-07-21 09:47:51 FINE sun.net.httpserver.ServerImpl logReply POST /user/register HTTP/1.1 [200  OK] ()
-2022-07-21 09:47:51 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
-2022-07-21 09:47:54 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
-2022-07-21 09:47:54 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/register HTTP/1.1
-2022-07-21 09:47:54 FINER RegisterHandler handle ENTRY
-2022-07-21 09:47:54 FINEST handlers.RegisterHandler handle /user/register
-2022-07-21 09:47:54 FINER RegisterService register ENTRY
-2022-07-21 09:47:54 FINER UserDAO insert ENTRY
-2022-07-21 09:47:54 FINEST dao.UserDAO insert INSERT INTO Users (username, password, email, firstName,lastName, gender, personID) VALUES(?, ?, ?, ?, ?, ?, ?) 
- parameters=[username, password, email, firstname, lastname, m, da928aee-ac6d-4bf4-8515-ad4bb5c3d001]
-2022-07-21 09:47:54 FINER UserDAO insert RETURN
-2022-07-21 09:47:54 SEVERE services.RegisterService register Error encountered while inserting a user into the database
-dao.DataAccessException: Error encountered while inserting a user into the database
-	at dao.UserDAO.insert(UserDAO.java:51)
-	at services.RegisterService.register(RegisterService.java:66)
-	at handlers.RegisterHandler.handle(RegisterHandler.java:33)
-	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
-	at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
-	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:101)
-	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:736)
-	at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:98)
-	at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:703)
-	at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:162)
-	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:450)
-	at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:416)
-	at java.base/java.lang.Thread.run(Thread.java:833)
-
-2022-07-21 09:47:54 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
-2022-07-21 09:47:54 FINE sun.net.httpserver.ServerImpl logReply POST /user/register HTTP/1.1 [400  Bad Request] ()
-2022-07-21 09:47:54 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
-2022-07-21 09:48:20 FINER sun.net.httpserver.HttpConnection close Closing connection: java.nio.channels.SocketChannel[connected local=/[0:0:0:0:0:0:0:1]:8080 remote=/[0:0:0:0:0:0:0:1]:51598]
+2022-07-21 17:12:30 INFO Server run Initializing HTTP Server
+2022-07-21 17:12:31 FINE sun.net.httpserver.ServerImpl <init> HttpServer created http 0.0.0.0/0.0.0.0:8080
+2022-07-21 17:12:31 INFO Server run Creating contexts
+2022-07-21 17:12:31 FINE sun.net.httpserver.ServerImpl createContext context created: /
+2022-07-21 17:12:31 FINE sun.net.httpserver.ServerImpl createContext context created: /clear
+2022-07-21 17:12:31 FINE sun.net.httpserver.ServerImpl createContext context created: /load
+2022-07-21 17:12:31 FINE sun.net.httpserver.ServerImpl createContext context created: /fill
+2022-07-21 17:12:31 FINE sun.net.httpserver.ServerImpl createContext context created: /user/register
+2022-07-21 17:12:31 FINE sun.net.httpserver.ServerImpl createContext context created: /user/login
+2022-07-21 17:12:31 FINE sun.net.httpserver.ServerImpl createContext context created: /event
+2022-07-21 17:12:31 FINE sun.net.httpserver.ServerImpl createContext context created: /person
+2022-07-21 17:12:31 INFO Server run Starting server
+2022-07-21 17:12:31 INFO Server run Server started
+2022-07-21 17:12:38 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-21 17:12:38 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/login HTTP/1.1
+2022-07-21 17:12:38 FINER LoginHandler handle ENTRY
+2022-07-21 17:12:38 FINER LoginService login ENTRY
+2022-07-21 17:12:38 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-21 17:12:38 FINE sun.net.httpserver.ServerImpl logReply POST /user/login HTTP/1.1 [200  OK] ()
+2022-07-21 17:12:38 FINER LoginHandler handle RETURN
+2022-07-21 17:12:38 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-21 17:12:38 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-21 17:12:38 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: GET /event HTTP/1.1
+2022-07-21 17:12:38 FINER EventHandler handle ENTRY
+2022-07-21 17:12:38 FINER EventService getResult ENTRY
+2022-07-21 17:12:38 FINER EventDAO getAllFromUser ENTRY
+2022-07-21 17:12:38 FINER dao.EventDAO getAllFromUser SELECT * FROM Events WHERE associatedUsername = ?; 
+ parameters=[sheila]
+2022-07-21 17:12:38 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-21 17:12:38 FINE sun.net.httpserver.ServerImpl logReply GET /event HTTP/1.1 [200  OK] ()
+2022-07-21 17:12:38 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-21 17:12:54 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-21 17:12:54 FINE sun.net.httpserver.ServerImpl$Exchange run no request line: closing
+2022-07-21 17:12:54 FINER sun.net.httpserver.HttpConnection close Closing connection: java.nio.channels.SocketChannel[connected local=/127.0.0.1:8080 remote=/127.0.0.1:59037]
+2022-07-21 17:12:54 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-21 17:12:54 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: GET /person HTTP/1.1
+2022-07-21 17:12:54 FINER PersonHandler handle ENTRY
+2022-07-21 17:12:54 FINER PersonService getResult ENTRY
+2022-07-21 17:13:06 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-21 17:13:06 FINE sun.net.httpserver.ServerImpl logReply GET /person HTTP/1.1 [200  OK] ()
+2022-07-21 17:13:06 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-21 17:13:36 FINER sun.net.httpserver.HttpConnection close Closing connection: java.nio.channels.SocketChannel[connected local=/127.0.0.1:8080 remote=/127.0.0.1:59080]
+2022-07-21 17:16:08 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-21 17:16:08 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: GET /person HTTP/1.1
+2022-07-21 17:16:08 FINER PersonHandler handle ENTRY
+2022-07-21 17:16:08 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-21 17:16:08 FINE sun.net.httpserver.ServerImpl logReply GET /person HTTP/1.1 [400  Bad Request] ()
+2022-07-21 17:16:08 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-21 17:16:15 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-21 17:16:15 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /clear HTTP/1.1
+2022-07-21 17:16:15 FINER ClearHandler handle ENTRY
+2022-07-21 17:16:15 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-21 17:16:15 FINE sun.net.httpserver.ServerImpl logReply POST /clear HTTP/1.1 [200  OK] ()
+2022-07-21 17:16:15 FINER ClearHandler handle RETURN
+2022-07-21 17:16:15 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-21 17:16:26 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-21 17:16:26 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: POST /user/register HTTP/1.1
+2022-07-21 17:16:26 FINER RegisterHandler handle ENTRY
+2022-07-21 17:16:26 FINEST handlers.RegisterHandler handle /user/register
+2022-07-21 17:16:26 FINER RegisterService register ENTRY
+2022-07-21 17:16:26 FINER UserDAO insert ENTRY
+2022-07-21 17:16:26 FINEST dao.UserDAO insert INSERT INTO Users (username, password, email, firstName,lastName, gender, personID) VALUES(?, ?, ?, ?, ?, ?, ?) 
+ parameters=[username, password, email, firstname, lastname, m, b0d8235c-6d24-40bb-904a-ff1efa8f0924]
+2022-07-21 17:16:26 FINER UserDAO insert RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[910a694c-87f4-4b97-8601-5a83474af3eb, username, Evelynn, Ogorman, f, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[bd600a49-ef99-45dc-a4d7-65147621cad3, username, Clement, Silvey, m, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER EventDAO generateMarriage ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[e6cbe916-4002-4770-9800-20f2ea73fbe4, username, Guillermina, Estell, f, 910a694c-87f4-4b97-8601-5a83474af3eb, bd600a49-ef99-45dc-a4d7-65147621cad3, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[f6d42ea7-9e77-4a47-8881-c1202f47baa2, username, Carlita, Jeppesen, f, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[8f90e630-4f1b-4f3e-8f1b-2d885a5b3948, username, Sam, Smolen, m, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER EventDAO generateMarriage ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[72ed8fe7-083a-44c5-8c07-c5a8c7a4ad12, username, Tyrell, Sydnor, m, f6d42ea7-9e77-4a47-8881-c1202f47baa2, 8f90e630-4f1b-4f3e-8f1b-2d885a5b3948, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER EventDAO generateMarriage ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[0f235acd-db5c-4295-95f2-3ef7f655868a, username, Tenesha, Simien, f, e6cbe916-4002-4770-9800-20f2ea73fbe4, 72ed8fe7-083a-44c5-8c07-c5a8c7a4ad12, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[84f740f3-9f87-4927-a46e-a2f6e140209d, username, Leann, Seeger, f, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[4f6563e3-405c-48e3-864a-65e80a55dabe, username, Theodore, Hellard, m, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER EventDAO generateMarriage ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[62ce33df-902d-4bd5-bc14-00b47fbfc890, username, Terisa, Dooling, f, 84f740f3-9f87-4927-a46e-a2f6e140209d, 4f6563e3-405c-48e3-864a-65e80a55dabe, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[a3170dfe-e824-40ae-948e-73af16092627, username, Lisa, Clear, f, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[19f56ee8-f9d2-4718-aed0-8635eba9b82c, username, Zack, Larusso, m, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER EventDAO generateMarriage ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[afaf2d31-4219-411a-92ac-6a26d48a30fb, username, Hayden, Schroyer, m, a3170dfe-e824-40ae-948e-73af16092627, 19f56ee8-f9d2-4718-aed0-8635eba9b82c, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER EventDAO generateMarriage ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[d8bd0a0d-5e86-4bbe-8815-44602aff8a34, username, Arden, Simington, m, 62ce33df-902d-4bd5-bc14-00b47fbfc890, afaf2d31-4219-411a-92ac-6a26d48a30fb, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER EventDAO generateMarriage ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[4acde1c7-49de-4444-beaf-9dfe11b869ab, username, Alpha, Dennis, f, 0f235acd-db5c-4295-95f2-3ef7f655868a, d8bd0a0d-5e86-4bbe-8815-44602aff8a34, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[76cf19b0-a52a-4240-b06e-17f0b8983087, username, Guillermina, Paxton, f, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[8b898a3e-f040-4fa9-b62d-a4f7bd42c6bb, username, Granville, Brace, m, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER EventDAO generateMarriage ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[24f24b2a-a532-4fe9-b993-b46d28df1fb5, username, Sanora, Schroyer, f, 76cf19b0-a52a-4240-b06e-17f0b8983087, 8b898a3e-f040-4fa9-b62d-a4f7bd42c6bb, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[2e6ffba4-d575-4eb5-92b3-d2c98b78f44a, username, Jeniffer, Silvey, f, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[09931313-9509-4b22-88a8-42f040fd4c62, username, Victor, Wilhite, m, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER EventDAO generateMarriage ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[0976670f-1fa0-4682-844f-58f5c9fdfed5, username, Nick, Gies, m, 2e6ffba4-d575-4eb5-92b3-d2c98b78f44a, 09931313-9509-4b22-88a8-42f040fd4c62, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER EventDAO generateMarriage ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[6b0e2146-fced-4729-8aab-bc0cd59fcf3a, username, Venus, Smolen, f, 24f24b2a-a532-4fe9-b993-b46d28df1fb5, 0976670f-1fa0-4682-844f-58f5c9fdfed5, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[ba4bed4e-3ba0-4010-8a60-540f3a5e755a, username, Dani, Pera, f, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[4aa660ae-0b16-491c-aab9-794d44cae615, username, Ezekiel, Heckel, m, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER EventDAO generateMarriage ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[3643787f-6270-4ae7-bcc5-3abec0a8a373, username, Vernetta, Sorensen, f, ba4bed4e-3ba0-4010-8a60-540f3a5e755a, 4aa660ae-0b16-491c-aab9-794d44cae615, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[ccbcfb5b-f7d9-4252-9156-e7c654e76a65, username, Shin, Taggert, f, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER PersonDAO generate ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[b284f5c0-cc50-49e1-abee-fab9bf020b9e, username, Brice, Kelson, m, null, null, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER EventDAO generateMarriage ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[69358f04-8e91-4c1c-afaf-36fb3083bcd8, username, Kevin, Ingalls, m, ccbcfb5b-f7d9-4252-9156-e7c654e76a65, b284f5c0-cc50-49e1-abee-fab9bf020b9e, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER EventDAO generateMarriage ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[920047e0-e74a-47eb-9cca-22ada771fbd2, username, Justin, Kelson, m, 3643787f-6270-4ae7-bcc5-3abec0a8a373, 69358f04-8e91-4c1c-afaf-36fb3083bcd8, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER EventDAO generateMarriage ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[d3357222-5697-471a-b109-8b72b037adc5, username, Blaine, Gies, m, 6b0e2146-fced-4729-8aab-bc0cd59fcf3a, 920047e0-e74a-47eb-9cca-22ada771fbd2, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINER EventDAO generateMarriage ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO getBirthYear ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER EventDAO generateDeath ENTRY
+2022-07-21 17:16:26 FINER EventDAO getAllFromPerson ENTRY
+2022-07-21 17:16:26 FINER PersonDAO insert ENTRY
+2022-07-21 17:16:26 FINER dao.PersonDAO insert INSERT INTO Persons (personID, associatedUsername, firstName, lastName, gender, motherID, fatherID, spouseID) VALUES(?, ?, ?, ?, ?, ?, ?, ?) 
+ parameters=[e77b2922-ce3a-4209-8f03-2bc98d59b819, username, Clifford, Zemlicka, m, 4acde1c7-49de-4444-beaf-9dfe11b869ab, d3357222-5697-471a-b109-8b72b037adc5, null]
+2022-07-21 17:16:26 FINER PersonDAO generate RETURN
+2022-07-21 17:16:26 FINEST dao.PersonDAO updatePersonByID UPDATE Persons SET personID = ?, associatedUsername = ?, firstName = ?, lastName = ?, gender = ?, motherID = ?, fatherID = ?, spouseID = ? WHERE personID = ?
+2022-07-21 17:16:26 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-21 17:16:26 FINE sun.net.httpserver.ServerImpl logReply POST /user/register HTTP/1.1 [200  OK] ()
+2022-07-21 17:16:26 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-21 17:16:30 FINER sun.net.httpserver.ServerImpl$Exchange run exchange started
+2022-07-21 17:16:30 FINE sun.net.httpserver.ServerImpl$Exchange run Exchange request line: GET /person HTTP/1.1
+2022-07-21 17:16:30 FINER PersonHandler handle ENTRY
+2022-07-21 17:16:30 FINER PersonService getResult ENTRY
+2022-07-21 17:16:30 FINER sun.net.httpserver.ExchangeImpl sendResponseHeaders Sent headers: noContentToSend=false
+2022-07-21 17:16:30 FINE sun.net.httpserver.ServerImpl logReply GET /person HTTP/1.1 [200  OK] ()
+2022-07-21 17:16:30 FINER sun.net.httpserver.ServerImpl$Dispatcher handleEvent Write Finished
+2022-07-21 17:16:56 FINER sun.net.httpserver.HttpConnection close Closing connection: java.nio.channels.SocketChannel[connected local=/[0:0:0:0:0:0:0:1]:8080 remote=/[0:0:0:0:0:0:0:1]:59602]

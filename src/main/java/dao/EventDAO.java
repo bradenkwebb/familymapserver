@@ -185,6 +185,19 @@ public class EventDAO {
         }
     }
 
+    public void clearUser(String username) throws DataAccessException {
+        logger.entering("EventDAO", "clearUser");
+
+        String sql = "DELETE FROM Events WHERE associatedUsername = ?;";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setString(1, username);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new DataAccessException("Error occurred while clearing events from " + username + "'s family tree");
+        }
+    }
+
     /**
      * Creates an event corresponding to a birth given an associated username, a personID for whom the event should
      * correspond, and the birth year of their child in the family tree. the birth event generated will be 13 and 50
@@ -229,6 +242,11 @@ public class EventDAO {
         logger.entering("EventDAO", "generateDeath");
 
         List<Event> personEvents = getAllFromPerson(personID);
+        if (personEvents.size() ==0) {
+            logger.log(Level.SEVERE, "Person " + personID + " has no events associated with them");
+            throw new DataAccessException("Error: Cannot generate death event because person "
+                    + personID + " has no events associated with them");
+        }
         Event birth = Collections.min(personEvents, Comparator.comparing(Event::getYear));
         Event mostRecent = Collections.max(personEvents, Comparator.comparing(Event::getYear));
         int deathYear = randomYear(mostRecent.getYear(), birth.getYear() + 120);

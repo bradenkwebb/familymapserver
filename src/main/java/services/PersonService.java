@@ -45,20 +45,19 @@ public class PersonService implements Service {
                     result.setSuccess(true);
                 } else {
                     result.setSuccess(false);
-                    result.setMessage("Person not found (at least not in this user's tree)");
+                    result.setMessage("Error: Person not found (at least not in this user's tree)");
                 }
             } else {
                 result = new PeopleResult(people);
                 result.setSuccess(true);
             }
             db.closeConnection(true);
-            return result;
         } catch (DataAccessException | SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             db.closeConnection(false);
+            result.setSuccess(false);
+            result.setMessage("Error:" + ex.getMessage());
         }
-        result.setSuccess(false);
-        result.setMessage("An error occurred when accessing people");
         return result;
     }
 

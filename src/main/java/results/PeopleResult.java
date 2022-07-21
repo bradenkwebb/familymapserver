@@ -12,21 +12,21 @@ public class PeopleResult extends Result {
     /**
      * The list of Person objects obtained from the database in the user's family tree.
      */
-    private List<Person> persons;
+    private List<Person> data;
 
     /**
      * Creates the object.
      */
     public PeopleResult() {}
     public PeopleResult(List<Person> people) {
-        this.persons = people;
+        this.data = people;
     }
 
-    public List<Person> getPersons() {
-        return persons;
+    public List<Person> getData() {
+        return data;
     }
 
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
+    public void setData(List<Person> data) {
+        this.data = data;
     }
 }

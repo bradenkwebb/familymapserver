@@ -15,7 +15,7 @@ public class LoadHandler implements Handler {
     public static final Logger logger = Logger.getLogger("LoadHandler");
 
     @Override
-    public void handle(HttpExchange exchange) {
+    public void handle(HttpExchange exchange) throws IOException {
         logger.entering("LoadHandler", "handl");
         int statusCode = HttpURLConnection.HTTP_INTERNAL_ERROR;
         Result result = new Result();
@@ -26,20 +26,21 @@ public class LoadHandler implements Handler {
                 LoadService loadService = new LoadService();
                 result = loadService.load((LoadRequest) deserialize(bodyJson, LoadRequest.class));
                 success = result.isSuccess();
+                if (success) {
+                    statusCode = HttpURLConnection.HTTP_OK;
+                }
             } else {
                 statusCode = HttpURLConnection.HTTP_BAD_METHOD;
                 result.setMessage("Error: Invalid method.");
             }
-            if (success) {
-                statusCode = HttpURLConnection.HTTP_OK;
-            }
-            exchange.sendResponseHeaders(statusCode, 0);
-            result.setSuccess(success);
-            writeString(serialize(result), exchange.getResponseBody());
-            exchange.getResponseBody().close();
         } catch (IOException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
-            throw new RuntimeException(ex.getMessage());
+            result.setSuccess(false);
+            result.setMessage("Error: " + ex.getMessage());
         }
+        exchange.sendResponseHeaders(statusCode, 0);
+        result.setSuccess(success);
+        writeString(serialize(result), exchange.getResponseBody());
+        exchange.getResponseBody().close();
     }
 }

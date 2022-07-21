@@ -82,7 +82,7 @@ public class EventDAOTest {
     }
 
     @Test
-    public void getAllFromUser() throws DataAccessException {
+    public void getAllFromUserPass() throws DataAccessException {
         System.out.println("getAllFromUser() called.");
 
         Event biking = new Event("Biking_123A", "Gale", "Gale123A",
@@ -102,4 +102,6 @@ public class EventDAOTest {
         eDao.insert(hiking);
         assertEquals(2, eDao.getAllFromUser("Gale").size());
     }
+
+
 }

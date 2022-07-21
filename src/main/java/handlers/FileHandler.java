@@ -43,6 +43,8 @@ public class FileHandler implements Handler {
                     success = true;
                 } else {
                     exchange.sendResponseHeaders(HttpURLConnection.HTTP_NOT_FOUND, 0);
+                    Files.copy(new File(sourcePath + "/HTML/404.html").toPath(), exchange.getResponseBody());
+//                    writeString("Page not found", exchange.getResponseBody());
                     exchange.getResponseBody().close();
                 }
             } else {

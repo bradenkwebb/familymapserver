@@ -53,7 +53,7 @@ public class LoginService implements Service {
                 result.setPersonID(personID);
             } else {
                 result.setSuccess(valid);
-                result.setMessage("Invalid credentials");
+                result.setMessage("Error: Invalid credentials");
             }
             db.closeConnection(true);
             return result;
@@ -63,7 +63,7 @@ public class LoginService implements Service {
         }
 
         result.setSuccess(false);
-        result.setMessage("An error occurred when logging in.");
+        result.setMessage("Error: An error occurred when logging in.");
         logger.exiting("LoginService", "login");
         return result;
     }

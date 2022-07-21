@@ -46,7 +46,7 @@ public class EventHandler implements Handler {
                         result = service.getResult(user.getUsername(), exchange.getRequestURI().toString());
 
                         success = result.isSuccess();
-                        statusCode = (success) ? HttpURLConnection.HTTP_OK : HttpURLConnection.HTTP_INTERNAL_ERROR;
+                        statusCode = (success) ? HttpURLConnection.HTTP_OK : HttpURLConnection.HTTP_BAD_REQUEST;
                     } else {
                         result.setMessage("Error: Invalid auth token");
                     }

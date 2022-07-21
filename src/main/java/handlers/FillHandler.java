@@ -26,9 +26,11 @@ public class FillHandler implements Handler {
     private final int DEFAULT_NUM_GEN = 4;
 
     @Override
-    public void handle(HttpExchange exchange) {
+    public void handle(HttpExchange exchange) throws IOException {
         logger.entering("FillHandler", "handle");
         boolean success = false;
+        FillResult result = new FillResult();
+        int statusCode = HttpURLConnection.HTTP_BAD_REQUEST;
 
         try {
             if (exchange.getRequestMethod().equalsIgnoreCase("post")) {
@@ -38,14 +40,19 @@ public class FillHandler implements Handler {
                 logger.finest(urlPath);
                 String[] parts = urlPath.split("/");
                 if (parts.length > NUM_GEN_INDEX + 1) {
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+                    exchange.sendResponseHeaders(statusCode, 0);
                     exchange.getResponseBody().close();
                     return;
                 } else if (parts.length == NUM_GEN_INDEX + 1) {
                     numGen = Integer.parseInt(parts[NUM_GEN_INDEX]);
+                    if (numGen < 0) {
+                        result.setSuccess(false);
+                        result.setMessage("Error: Invalid generations parameter");
+                    }
                 } else {
                     numGen = DEFAULT_NUM_GEN;
                 }
+
                 String username = parts[USERNAME_INDEX];
 
                 logger.finest("username: " + username);
@@ -53,23 +60,26 @@ public class FillHandler implements Handler {
 
                 FillRequest request = (FillRequest) deserialize(exchange.getRequestBody(), FillRequest.class);
                 FillService service = new FillService();
-                FillResult result = service.fill(request, username, numGen);
+                result = service.fill(request, username, numGen);
+
                 success = result.isSuccess();
                 if (success) {
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+                    statusCode = HttpURLConnection.HTTP_OK;
                 } else {
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, 0);
+                    statusCode = HttpURLConnection.HTTP_INTERNAL_ERROR;
                 }
-                writeString(serialize(result), exchange.getResponseBody());
-                exchange.getResponseBody().close();
-                logger.exiting("FillHandler", "handle");
             } else {
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
-                exchange.getResponseBody().close();
+                statusCode = HttpURLConnection.HTTP_BAD_METHOD;
+                result.setMessage("Error: Invalid request method");
             }
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
-            throw new RuntimeException(e.getMessage(), e);
+            success = false;
+            result.setMessage("Error: " + e.getMessage());
         }
+        result.setSuccess(success);
+        exchange.sendResponseHeaders(statusCode, 0);
+        writeString(serialize(result), exchange.getResponseBody());
+        exchange.getResponseBody().close();
     }
 }
