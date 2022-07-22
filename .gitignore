@@ -1,4 +1,4 @@
-/target/
+/target/*
 familymap.sqlite
 log.txt*
 logging.propertiesFMS_Passoff.log
