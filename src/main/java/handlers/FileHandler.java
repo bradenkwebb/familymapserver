@@ -19,38 +19,38 @@ public class FileHandler implements Handler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         logger.entering("FileHandler", "handle");
+
+        // We assume that the page they're looking for doesn't exit
         int statusCode = HttpURLConnection.HTTP_NOT_FOUND;
+
         boolean appropriateMethod = exchange.getRequestMethod().equalsIgnoreCase("get");
 
         File file = getFile(exchange.getRequestURI().toString());
         if (!appropriateMethod) {
             statusCode = HttpURLConnection.HTTP_BAD_METHOD;
-            exchange.sendResponseHeaders(statusCode, 0);
         } else if (!file.exists()) {
-            exchange.sendResponseHeaders(statusCode, 0);
             file = new File(SOURCE_PATH + "/HTML/404.html");
         } else {
             statusCode = HttpURLConnection.HTTP_OK;
-            exchange.sendResponseHeaders(statusCode, 0);
         }
+
+        exchange.sendResponseHeaders(statusCode, 0);
         if (appropriateMethod){
             Files.copy(file.toPath(), exchange.getResponseBody());
         }
-
         exchange.getResponseBody().close();
     }
 
     private File getFile(String urlPath) {
+        logger.entering("FileHandler", "getFile");
         if (urlPath == null || urlPath.equals("/")) {
             logger.fine("Original urlPath: " + urlPath);
             urlPath = "/index.html";
         }
-        logger.finer("urlPath: " + urlPath);
-
         String filePath = SOURCE_PATH +  urlPath;
 
+        logger.finer("urlPath: " + urlPath);
         logger.finest("filePath: " + filePath);
-
         return new File(filePath);
     }
 
