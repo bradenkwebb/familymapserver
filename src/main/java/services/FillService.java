@@ -42,9 +42,12 @@ public class FillService implements Service {
             PersonDAO pDao = new PersonDAO(conn);
             EventDAO eDao = new EventDAO(conn);
 
+            // First, clear the entire family tree of anything associated with this user
             pDao.clearUser(username);
             eDao.clearUser(username);
-            User currUser  = uDao.find(username);
+
+            User currUser  = uDao.find(username); // the user whose family tree we will now fill
+
             if (currUser == null) {
                 result.setSuccess(false);
                 result.setMessage("Error: Invalid username");
@@ -52,8 +55,12 @@ public class FillService implements Service {
                 result.setSuccess(false);
                 result.setMessage("Error: Invalid generations parameter");
             } else {
+
+                // Generate the family tree
                 Person userPerson = pDao.generate(currUser, generations);
 
+                // After the tree has been generated, retroactively update the user's information to match what's
+                // in the tree
                 currUser.setPersonID(userPerson.getPersonID());
                 currUser.setFirstName(userPerson.getFirstName());
                 currUser.setLastName(userPerson.getLastName());
@@ -78,6 +85,7 @@ public class FillService implements Service {
         }
         return result;
     }
+
     private boolean validNumGen(int numGen) {
         return numGen >= 0;
     }

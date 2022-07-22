@@ -41,7 +41,7 @@ public class EventService implements Service {
         Result result = new Result();
         result.setSuccess(false);
         Database db = new Database();
-        Connection conn = null;
+        Connection conn;
 
         try (Connection c = db.getConnection()) {
             conn = c;
