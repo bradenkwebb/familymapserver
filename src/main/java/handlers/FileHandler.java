@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 public class FileHandler implements Handler {
 
     private static final Logger logger = Logger.getLogger("FileHandler");
+    private final String SOURCE_PATH = "web";
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -22,19 +23,8 @@ public class FileHandler implements Handler {
 
         try {
             if (exchange.getRequestMethod().equalsIgnoreCase("get")) {
-                String urlPath = exchange.getRequestURI().toString();
-                if (urlPath == null || urlPath.equals("/")) {
-                    logger.fine("Original urlPath: " + urlPath);
-                    urlPath = "/index.html";
-                }
-                logger.finer("urlPath: " + urlPath);
+                File file = getFile(exchange.getRequestURI().toString());
 
-                String sourcePath = "web";
-                String filePath = sourcePath +  urlPath;
-
-                logger.finest("filePath: " + filePath);
-
-                File file = new File(filePath);
                 if (file.exists()) {
                     exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                     OutputStream responseBody = exchange.getResponseBody();
@@ -43,7 +33,7 @@ public class FileHandler implements Handler {
                     success = true;
                 } else {
                     exchange.sendResponseHeaders(HttpURLConnection.HTTP_NOT_FOUND, 0);
-                    Files.copy(new File(sourcePath + "/HTML/404.html").toPath(), exchange.getResponseBody());
+                    Files.copy(new File(SOURCE_PATH + "/HTML/404.html").toPath(), exchange.getResponseBody());
 //                    writeString("Page not found", exchange.getResponseBody());
                     exchange.getResponseBody().close();
                 }
@@ -56,6 +46,20 @@ public class FileHandler implements Handler {
             exchange.getResponseBody().close();
             e.printStackTrace();
         }
+    }
+
+    private File getFile(String urlPath) {
+        if (urlPath == null || urlPath.equals("/")) {
+            logger.fine("Original urlPath: " + urlPath);
+            urlPath = "/index.html";
+        }
+        logger.finer("urlPath: " + urlPath);
+
+        String filePath = SOURCE_PATH +  urlPath;
+
+        logger.finest("filePath: " + filePath);
+
+        return new File(filePath);
     }
 
 }
