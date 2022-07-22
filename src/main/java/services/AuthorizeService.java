@@ -12,19 +12,33 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * A class for determining whether provided authentication information is valid.
+ */
 public class AuthorizeService implements Service {
     static public final Logger logger = Logger.getLogger("AuthorizeService");
+
+    /**
+     * Searches the database for the provided authToken and, if found, returns a User object corresponding to the User
+     * to whom the authToken belongs. If not found, returns null.
+     *
+     * @param authToken the token to validate
+     * @return the authenticated User if valid, otherwise null.
+     */
     public User authorize(String authToken) {
+        logger.entering("AuthorizeService", "authorize");
         Database db = new Database();
-        Connection conn = null;
+        Connection conn;
 
         try (Connection c = db.getConnection()) {
             conn = c;
-            AuthTokenDAO aDao = new AuthTokenDAO(conn);
-            AuthToken token = aDao.find(authToken);
+
+            AuthToken token = new AuthTokenDAO(conn).find(authToken);
+
             if (token != null) {
-                UserDAO uDao = new UserDAO(conn);
-                return uDao.find(token.getUsername());
+
+                return new UserDAO(conn).find(token.getUsername());
+
             } else {
                 return null;
             }
