@@ -1,12 +1,14 @@
 package model;
 
+/**
+ * An object for representing a Location.
+ */
 public class Location {
+
     private String country;
     private String city;
     private float latitude;
     private float longitude;
-
-    public Location(){}
 
     public String getCountry() {
         return country;
