@@ -82,6 +82,12 @@ public class EventDAOTest {
     }
 
     @Test
+    public void findPass() throws DataAccessException {}
+
+    @Test
+    public void findFail() throws DataAccessException {}
+
+    @Test
     public void getAllFromUserPass() throws DataAccessException {
         System.out.println("getAllFromUser() called.");
 
@@ -103,5 +109,39 @@ public class EventDAOTest {
         assertEquals(2, eDao.getAllFromUser("Gale").size());
     }
 
+    @Test
+    public void getAllFromUserFail() throws DataAccessException {}
 
+    @Test
+    public void clearPass() throws DataAccessException {}
+
+    @Test
+    public void clearUserPass() throws DataAccessException {}
+
+    @Test
+    public void clearUserFail() throws DataAccessException {}
+
+    @Test
+    public void generateBirthPass() throws DataAccessException {}
+
+    @Test
+    public void generateBirthFail() throws DataAccessException {}
+
+    @Test
+    public void generateMarriagePass() throws DataAccessException {}
+
+    @Test
+    public void generateMarriageFail() throws DataAccessException {}
+
+    @Test
+    public void generateDeathPass() throws DataAccessException {}
+
+    @Test
+    public void generateDeathFail() throws DataAccessException {}
+
+    @Test
+    public void updatePersonIDsPass() throws DataAccessException {}
+
+    @Test
+    public void updatePersonIDsFail() throws DataAccessException {}
 }

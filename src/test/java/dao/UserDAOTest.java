@@ -77,6 +77,18 @@ public class UserDAOTest {
     }
 
     @Test
+    public void updatePass() throws DataAccessException {}
+
+    @Test
+    public void updateFail() throws DataAccessException {}
+
+    @Test
+    public void validatePass() throws DataAccessException {}
+
+    @Test
+    public void validateFail() throws DataAccessException {}
+
+    @Test
     public void clearPass() throws DataAccessException {
         System.out.println("clearPass() called.");
 

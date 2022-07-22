@@ -110,19 +110,20 @@ public class PersonDAOTest {
     }
 
     @Test
-    public void totalNumPeoplePass() throws DataAccessException {
-        System.out.println("totalNumPeoplePass() called.");
-
-        pDao.clear();
-        assertEquals(0, pDao.totalNumPeople());
+    public void clearUserPass() throws DataAccessException {
         pDao.insert(me);
+        pDao.insert(anna);
+        pDao.clearUser(me.getAssociatedUsername());
         assertEquals(1, pDao.totalNumPeople());
-        me.setPersonID(UUID.randomUUID().toString());
+    }
+
+    @Test
+    public void clearUserFail() throws DataAccessException {
         pDao.insert(me);
-        assertEquals(2, pDao.totalNumPeople());
-        pDao.clear();
-        pDao.generate(me.getAssociatedUsername(), me.getGender(), 5, 1999);
-        assertEquals(63, pDao.totalNumPeople());
+        pDao.insert(anna);
+        pDao.clearUser(me.getAssociatedUsername());
+        System.out.println(pDao.find(me.getPersonID()));
+        assertNull(pDao.find(me.getPersonID()));
     }
 
     @Test
@@ -160,50 +161,31 @@ public class PersonDAOTest {
         assertEquals(31, pDao.totalNumPeople());
     }
 
-//    @Test
-//    public void updatePersonByIDPass() throws DataAccessException {
-//        System.out.println("updatePersonByIDPass() called.");
-//
-//        pDao.insert(me);
-//        me.setLastName("Everett");
-//        assertDoesNotThrow(() -> pDao.updatePersonByID(me));
-//        System.out.println(pDao.find(me.getPersonID()).getLastName());
-//        assertEquals("Everett", pDao.find(me.getPersonID()).getLastName());
-//    }
-//
-//    @Test
-//    public void updatePersonByIDFail() throws DataAccessException {
-//        System.out.println("updatePersonByIDFail() called");
-//
-//        pDao.insert(me);
-//
-//        String id = "bwebb";
-//
-//        me.setPersonID(id);
-//        pDao.updatePersonByID(me);
-//        assertNull(pDao.find(me.getPersonID()));
-//        pDao.insert(anna);
-//        me.setPersonID(anna.getPersonID());
-//        pDao.updatePersonByID(me);
-//        assertEquals("bkwebb23", pDao.find(me.getPersonID()).getAssociatedUsername());
-//    }
+    @Test
+    public void generateFail() throws DataAccessException {}
 
     @Test
-    public void clearUserPass() throws DataAccessException {
+    public void totalNumPeoplePass() throws DataAccessException {
+        System.out.println("totalNumPeoplePass() called.");
+
+        pDao.clear();
+        assertEquals(0, pDao.totalNumPeople());
         pDao.insert(me);
-        pDao.insert(anna);
-        pDao.clearUser(me.getAssociatedUsername());
         assertEquals(1, pDao.totalNumPeople());
+        me.setPersonID(UUID.randomUUID().toString());
+        pDao.insert(me);
+        assertEquals(2, pDao.totalNumPeople());
+        pDao.clear();
+        pDao.generate(me.getAssociatedUsername(), me.getGender(), 5, 1999);
+        assertEquals(63, pDao.totalNumPeople());
     }
 
     @Test
-    public void clearUserFail() throws DataAccessException {
-        pDao.insert(me);
-        pDao.insert(anna);
-        pDao.clearUser(me.getAssociatedUsername());
-        System.out.println(pDao.find(me.getPersonID()));
-        assertNull(pDao.find(me.getPersonID()));
-    }
+    public void totalNumPeopleFail() throws DataAccessException {}
 
+    @Test
+    public void famSizePass() throws DataAccessException {}
 
+    @Test
+    public void famSizeFail() throws DataAccessException {}
 }

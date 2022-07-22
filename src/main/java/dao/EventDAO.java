@@ -160,6 +160,12 @@ public class EventDAO {
         }
     }
 
+    /**
+     * Deletes all events in the database associated with a given username.
+     *
+     * @param username the associatedUsername to look for
+     * @throws DataAccessException if an error occurs
+     */
     public void clearUser(String username) throws DataAccessException {
         logger.entering("EventDAO", "clearUser");
 

@@ -57,36 +57,6 @@ public class UserDAO {
     }
 
     /**
-     * Updates the row in the Users table matching the provided user's username to the current state of the user.
-     *
-     * @param user the user to update
-     * @throws DataAccessException if an error occurs
-     */
-    public void update(User user) throws DataAccessException {
-        logger.entering("UserDAO", "insert");
-        String sql = "UPDATE Users " + "SET username = ?, password = ?, email = ?, firstName = ?, " +
-                     "lastName = ?, gender = ?, personID = ?" + "WHERE username = ?;";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getPassword());
-            stmt.setString(3, user.getEmail());
-            stmt.setString(4, user.getFirstName());
-            stmt.setString(5, user.getLastName());
-            stmt.setString(6, user.getGender());
-            stmt.setString(7, user.getPersonID());
-            stmt.setString(8, user.getUsername());
-
-            logger.finest(stmt.toString());
-
-            stmt.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            logger.log(Level.WARNING, ex.getMessage(), ex);
-            throw new DataAccessException("Error encountered when updating user in database");
-        }
-    }
-
-    /**
      * Obtains a user from our database's Users table given their username.
      *
      * @param username the primary key to use to locate the user
@@ -111,6 +81,36 @@ public class UserDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new DataAccessException("Error encountered while finding a user in the database");
+        }
+    }
+
+    /**
+     * Updates the row in the Users table matching the provided user's username to the current state of the user.
+     *
+     * @param user the user to update
+     * @throws DataAccessException if an error occurs
+     */
+    public void update(User user) throws DataAccessException {
+        logger.entering("UserDAO", "insert");
+        String sql = "UPDATE Users " + "SET username = ?, password = ?, email = ?, firstName = ?, " +
+                "lastName = ?, gender = ?, personID = ?" + "WHERE username = ?;";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getPassword());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getFirstName());
+            stmt.setString(5, user.getLastName());
+            stmt.setString(6, user.getGender());
+            stmt.setString(7, user.getPersonID());
+            stmt.setString(8, user.getUsername());
+
+            logger.finest(stmt.toString());
+
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            logger.log(Level.WARNING, ex.getMessage(), ex);
+            throw new DataAccessException("Error encountered when updating user in database");
         }
     }
 
