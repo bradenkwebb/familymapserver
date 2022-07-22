@@ -1,7 +1,7 @@
 package services;
 
 import dao.*;
-import requests.ClearRequest;
+import requests.Request;
 import results.Result;
 
 import java.sql.Connection;
@@ -24,7 +24,7 @@ public class ClearService implements Service {
      *
      * @return a Result() object describing the success or failure of the action.
      */
-    public Result clear(ClearRequest r) {
+    public Result clear(Request r) {
         Result result = new Result();
         Database db = new Database();
         try (Connection conn = db.openConnection()) {

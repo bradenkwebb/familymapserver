@@ -1,7 +1,7 @@
 package handlers;
 
 import com.sun.net.httpserver.HttpExchange;
-import requests.FillRequest;
+import requests.Request;
 import results.Result;
 import services.FillService;
 
@@ -46,7 +46,7 @@ public class FillHandler implements Handler {
                     logger.finest("username: " + username);
                     logger.finest("numGen: " + numGen);
 
-                    FillRequest request = (FillRequest) deserialize(exchange.getRequestBody(), FillRequest.class);
+                    Request request = deserialize(exchange.getRequestBody(), Request.class);
                     result = new FillService().fill(request, username, numGen);
 
                     if (result.isSuccess()) {

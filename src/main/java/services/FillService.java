@@ -3,7 +3,7 @@ package services;
 import dao.*;
 import model.Person;
 import model.User;
-import requests.FillRequest;
+import requests.Request;
 import results.Result;
 
 import java.sql.Connection;
@@ -30,7 +30,7 @@ public class FillService implements Service {
      * @param generations the number of generations of ancestors to generate for the user. If not provided, defaults
      *                    to 4.
      */
-    public Result fill(FillRequest r, String username, int generations) {
+    public Result fill(Request r, String username, int generations) {
         logger.entering("FillService", "fill");
 
         Result result = new Result();

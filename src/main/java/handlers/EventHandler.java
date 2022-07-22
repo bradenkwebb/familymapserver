@@ -3,7 +3,6 @@ package handlers;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import model.User;
-import requests.AllEventsRequest;
 import results.Result;
 import services.AuthorizeService;
 import services.EventService;
