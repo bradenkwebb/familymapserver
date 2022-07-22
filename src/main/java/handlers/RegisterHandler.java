@@ -24,36 +24,24 @@ public class RegisterHandler implements Handler {
         result.setSuccess(false);
         int statusCode = HttpURLConnection.HTTP_BAD_REQUEST;
 
-        try {
-            String urlPath = exchange.getRequestURI().toString();
-            logger.finest(urlPath);
-            if (exchange.getRequestMethod().toLowerCase().equals("post")) {
+        if (exchange.getRequestMethod().equalsIgnoreCase("post")) {
 
-                RegisterRequest registerRequest = (RegisterRequest) deserialize(exchange.getRequestBody(), RegisterRequest.class);
-                RegisterService service = new RegisterService();
-                result = service.register(registerRequest);
-
-                if (result.isSuccess()) {
-                    statusCode = HttpURLConnection.HTTP_OK;
-                }
-            } else {
-                logger.info("Invalid request method");
-                statusCode = HttpURLConnection.HTTP_BAD_METHOD;
-                result.setSuccess(false);
-                result.setMessage("Error: Invalid request method");
-            }
-
-        } catch (IOException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
-            ex.printStackTrace();
+            RegisterRequest registerRequest = (RegisterRequest) deserialize(exchange.getRequestBody(),
+                                                                            RegisterRequest.class);
+            result = new RegisterService().register(registerRequest);
+        } else {
+            logger.info("Invalid request method");
+            statusCode = HttpURLConnection.HTTP_BAD_METHOD;
             result.setSuccess(false);
-            result.setMessage("Error: Unable to parse JSON; likely either a request property is " +
-                             "missing or has invalid value");
+            result.setMessage("Error: Invalid request method");
+        }
+
+        if (result.isSuccess()) {
+            statusCode = HttpURLConnection.HTTP_OK;
         }
 
         exchange.sendResponseHeaders(statusCode, 0);
-        OutputStream responseBody = exchange.getResponseBody();
-        writeString(serialize(result), responseBody);
+        writeString(serialize(result), exchange.getResponseBody());
         exchange.getResponseBody().close();
     }
 }
