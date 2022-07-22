@@ -38,6 +38,7 @@ public class LoadHandler implements Handler {
             result.setSuccess(false);
             result.setMessage("Error: " + ex.getMessage());
         }
+
         exchange.sendResponseHeaders(statusCode, 0);
         result.setSuccess(success);
         writeString(serialize(result), exchange.getResponseBody());
