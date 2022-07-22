@@ -241,14 +241,13 @@ public class PersonDAO {
      */
     public Person generate(String username, String gender, int numGenerations, int personBirthYear) throws DataAccessException {
         logger.entering("PersonDAO", "generate");
-        Person mother = null;
-        Person father = null;
+        Person mother;
+        Person father;
         String motherID = null;
         String fatherID = null;
         EventDAO eventDAO = new EventDAO(conn);
 
         if (numGenerations >= 1) {
-            // TODO add more logic here to fix event dates and stuff
             // Mothers should be between ages 13 and 50
             mother = generate(username, "f", numGenerations - 1,
                               randomYear(personBirthYear - 50, personBirthYear - 13));
@@ -275,8 +274,6 @@ public class PersonDAO {
 
         eventDAO.generateBirth(username, personID, personBirthYear);
 
-
-        logger.exiting("PersonDAO", "generate");
         return person;
     }
 

@@ -2,7 +2,7 @@ package handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import requests.FillRequest;
-import results.FillResult;
+import results.Result;
 import services.FillService;
 
 import java.io.IOException;
@@ -28,45 +28,34 @@ public class FillHandler implements Handler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         logger.entering("FillHandler", "handle");
-        boolean success = false;
-        FillResult result = new FillResult();
+        Result result = new Result();
         int statusCode = HttpURLConnection.HTTP_BAD_REQUEST;
 
         try {
             if (exchange.getRequestMethod().equalsIgnoreCase("post")) {
                 String urlPath = exchange.getRequestURI().toString();
-                int numGen;
+                Integer numGen;
 
                 logger.finest(urlPath);
+
                 String[] parts = urlPath.split("/");
-                if (parts.length > NUM_GEN_INDEX + 1) {
-                    exchange.sendResponseHeaders(statusCode, 0);
-                    exchange.getResponseBody().close();
-                    return;
-                } else if (parts.length == NUM_GEN_INDEX + 1) {
-                    numGen = Integer.parseInt(parts[NUM_GEN_INDEX]);
-                    if (numGen < 0) {
-                        result.setSuccess(false);
-                        result.setMessage("Error: Invalid generations parameter");
+                numGen = getNumGenerations(parts);
+                if (numGen != null) {
+                    String username = parts[USERNAME_INDEX];
+
+                    logger.finest("username: " + username);
+                    logger.finest("numGen: " + numGen);
+
+                    FillRequest request = (FillRequest) deserialize(exchange.getRequestBody(), FillRequest.class);
+                    result = new FillService().fill(request, username, numGen);
+
+                    if (result.isSuccess()) {
+                        statusCode = HttpURLConnection.HTTP_OK;
+                    } else {
+                        statusCode = HttpURLConnection.HTTP_INTERNAL_ERROR;
                     }
                 } else {
-                    numGen = DEFAULT_NUM_GEN;
-                }
-
-                String username = parts[USERNAME_INDEX];
-
-                logger.finest("username: " + username);
-                logger.finest("numGen: " + Integer.toString(numGen));
-
-                FillRequest request = (FillRequest) deserialize(exchange.getRequestBody(), FillRequest.class);
-                FillService service = new FillService();
-                result = service.fill(request, username, numGen);
-
-                success = result.isSuccess();
-                if (success) {
-                    statusCode = HttpURLConnection.HTTP_OK;
-                } else {
-                    statusCode = HttpURLConnection.HTTP_INTERNAL_ERROR;
+                    result.setMessage("Error: Invalid generations parameter");
                 }
             } else {
                 statusCode = HttpURLConnection.HTTP_BAD_METHOD;
@@ -74,12 +63,23 @@ public class FillHandler implements Handler {
             }
         } catch (IOException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
-            success = false;
+            result.setSuccess(false);
             result.setMessage("Error: " + e.getMessage());
         }
-        result.setSuccess(success);
         exchange.sendResponseHeaders(statusCode, 0);
         writeString(serialize(result), exchange.getResponseBody());
         exchange.getResponseBody().close();
     }
+
+    private Integer getNumGenerations(String[] urlParts) {
+        int numGen;
+        if (urlParts.length > NUM_GEN_INDEX + 1) {
+            return null;
+        } else if (urlParts.length == NUM_GEN_INDEX + 1) {
+            numGen = Integer.parseInt(urlParts[NUM_GEN_INDEX]);
+            return (numGen >= 0) ? numGen : null;
+        }
+        return DEFAULT_NUM_GEN;
+    }
+
 }

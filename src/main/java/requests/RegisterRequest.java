@@ -36,12 +36,9 @@ public class RegisterRequest implements Request {
     private String gender;
 
     /**
-     * Creates the Request object (and potentially deserializes a provided JSON string into the object?).
+     * Creates the Request object
      */
-    public RegisterRequest() {
-        // TODO implement RegisterRequest constructor
-        // I think the deserialization should be done by the handler?
-    }
+    public RegisterRequest() { }
 
     public String getUsername() {
         return username;

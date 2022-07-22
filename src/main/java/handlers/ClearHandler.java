@@ -1,10 +1,9 @@
 package handlers;
 
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import requests.ClearRequest;
 import requests.RegisterRequest;
-import results.ClearResult;
+import results.Result;
 import services.ClearService;
 
 import java.io.IOException;
@@ -21,10 +20,10 @@ public class ClearHandler implements Handler {
     public void handle(HttpExchange exchange) throws IOException {
         logger.entering("ClearHandler", "handle");
         try {
-            if (exchange.getRequestMethod().toLowerCase().equals("post")) {
+            if (exchange.getRequestMethod().equalsIgnoreCase("post")) {
                 ClearRequest request = (ClearRequest) deserialize(exchange.getRequestBody(), RegisterRequest.class);
                 ClearService service = new ClearService();
-                ClearResult result = service.clear(request);
+                Result result = service.clear(request);
 
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                 OutputStream responseBody = exchange.getResponseBody();

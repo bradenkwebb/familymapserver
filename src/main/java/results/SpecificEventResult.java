@@ -52,11 +52,9 @@ public class SpecificEventResult extends Result {
      */
     private int year;
 
-
     /**
      * Creates the object.
      */
-    public SpecificEventResult() {}
     public SpecificEventResult(Event event) {
         this.associatedUsername = event.getAssociatedUsername();
         this.eventID = event.getEventID();

@@ -2,7 +2,7 @@ package services;
 
 import dao.*;
 import requests.ClearRequest;
-import results.ClearResult;
+import results.Result;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,12 +20,12 @@ public class ClearService implements Service {
     public ClearService() {}
 
     /**
-     * Deletes ALL the data from the database, including user, authtoken, person, and event data
+     * Deletes ALL the data from the database, including user, authtoken, person, and event data.
      *
-     * @return
+     * @return a Result() object describing the success or failure of the action.
      */
-    public ClearResult clear(ClearRequest r) {
-        ClearResult result = new ClearResult();
+    public Result clear(ClearRequest r) {
+        Result result = new Result();
         Database db = new Database();
         try (Connection conn = db.openConnection()) {
             new UserDAO(conn).clear();

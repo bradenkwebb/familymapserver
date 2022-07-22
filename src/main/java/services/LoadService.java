@@ -5,7 +5,6 @@ import model.Event;
 import model.Person;
 import model.User;
 import requests.LoadRequest;
-import results.LoadResult;
 import results.Result;
 
 import java.sql.Connection;
@@ -33,7 +32,7 @@ public class LoadService implements Service {
     public Result load(LoadRequest r) {
         Result result = new Result();
         Database db = new Database();
-        Connection conn = null;
+        Connection conn;
         try (Connection c = db.getConnection()) {
             conn = c;
             ClearService clearService = new ClearService();

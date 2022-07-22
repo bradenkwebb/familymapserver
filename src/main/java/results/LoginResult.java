@@ -24,15 +24,13 @@ public class LoginResult extends Result {
      * Creates the Response object. If the request was successful, the fields authtoken, username, and personID should
      * be set, with success=true. If the request was unsuccessful, the message field should be set, with success=false.
      */
-    public LoginResult() {
-        // TODO implement this constructor
-    }
+    public LoginResult() {}
 
     public String getAuthtoken() {
         return authtoken;
     }
 
-    public void setAuthtoken(String authtoken) {
+    public void setAuthToken(String authtoken) {
         this.authtoken = authtoken;
     }
 

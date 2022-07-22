@@ -16,7 +16,6 @@ public class AllEventsResult extends Result {
     /**
      * Creates the object.
      */
-    public AllEventsResult() {}
     public AllEventsResult(List<Event> events) {
         this.data = events;
     }

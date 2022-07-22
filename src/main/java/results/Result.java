@@ -2,7 +2,7 @@ package results;
 
 public class Result {
     /**
-     * Whether or not the requested method attempt was successful.
+     * Whether the requested method attempt was successful.
      */
     boolean success;
     /**

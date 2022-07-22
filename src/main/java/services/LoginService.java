@@ -5,7 +5,6 @@ import dao.DataAccessException;
 import dao.Database;
 import dao.UserDAO;
 import model.AuthToken;
-import model.Person;
 import requests.LoginRequest;
 import results.LoginResult;
 
@@ -36,7 +35,7 @@ public class LoginService implements Service {
         LoginResult result = new LoginResult();
 
         Database db = new Database();
-        Connection conn = null;
+        Connection conn;
         try (Connection c = db.getConnection()) {
             conn = c;
             boolean valid = new UserDAO(conn).validate(r.getUsername(), r.getPassword());
@@ -48,7 +47,7 @@ public class LoginService implements Service {
                 String personID = new UserDAO(conn).find(r.getUsername()).getPersonID();
 
                 result.setUsername(r.getUsername());
-                result.setAuthtoken(generatedToken);
+                result.setAuthToken(generatedToken);
                 result.setSuccess(valid);
                 result.setPersonID(personID);
             } else {

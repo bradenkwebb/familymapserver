@@ -3,9 +3,7 @@ package services;
 import dao.DataAccessException;
 import dao.Database;
 import dao.PersonDAO;
-import model.Event;
 import model.Person;
-import requests.GetAllPeopleRequest;
 import results.PeopleResult;
 import results.PersonResult;
 import results.Result;
@@ -32,21 +30,14 @@ public class PersonService implements Service {
         logger.entering("PersonService", "getResult");
         Result result = new PersonResult();
         Database db = new Database();
-        Connection conn = null;
+        Connection conn;
 
         try (Connection c = db.getConnection()) {
             conn = c;
             PersonDAO personDAO = new PersonDAO(conn);
             List<Person> people = personDAO.getAllFamily(username);
             if (isSpecific(urlPath)) {
-                Person person = getPersonFromList(getIDFromPath(urlPath), people);
-                if (person != null) {
-                    result = new PersonResult(person);
-                    result.setSuccess(true);
-                } else {
-                    result.setSuccess(false);
-                    result.setMessage("Error: Person not found (at least not in this user's tree)");
-                }
+                result = individual(result, urlPath, people);
             } else {
                 result = new PeopleResult(people);
                 result.setSuccess(true);
@@ -62,16 +53,7 @@ public class PersonService implements Service {
     }
 
     /**
-     * Returns ALL family members of the current user. The current user is determined by the provided authtoken.
-     * @param r the GetALLPeopleRequest object containing the user's authtoken.
-     */
-    public void getAllFamily(GetAllPeopleRequest r) {
-
-        // TODO implement GetAllPeopleService().getAllFamily()
-    }
-
-    /**
-     * Determines whether or not the given urlPath is requesting all people, or just one person
+     * Determines whether the given urlPath is requesting all people, or just one person
      *
      * @param urlPath the HTTP Request URI to parse
      * @return true if the number of components delimited by "/" is the number expected for a specific person
@@ -94,5 +76,17 @@ public class PersonService implements Service {
     private String getIDFromPath(String urlPath) {
         String[] parts = urlPath.split("/");
         return parts[ID_INDEX];
+    }
+
+    private Result individual(Result r, String urlPath, List<Person> people) {
+        Person person = getPersonFromList(getIDFromPath(urlPath), people);
+        if (person != null) {
+            r = new PersonResult(person);
+            r.setSuccess(true);
+        } else {
+            r.setSuccess(false);
+            r.setMessage("Error: Person not found (at least not in this user's tree)");
+        }
+        return r;
     }
 }

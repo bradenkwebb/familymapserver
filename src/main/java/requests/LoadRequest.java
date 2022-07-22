@@ -27,11 +27,9 @@ public class LoadRequest implements Request {
     private List<Event> events;
 
     /**
-     * Creates the object.
+     * Default constructor.
      */
-    public LoadRequest() {
-        //TODO implement this constructor
-    }
+    public LoadRequest() {}
 
     public List<User> getUsers() {
         return users;

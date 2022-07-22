@@ -17,7 +17,6 @@ public class PeopleResult extends Result {
     /**
      * Creates the object.
      */
-    public PeopleResult() {}
     public PeopleResult(List<Person> people) {
         this.data = people;
     }
