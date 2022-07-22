@@ -78,6 +78,8 @@ public class Event {
         this.year = year;
     }
 
+    public Event() {}
+
     public String getEventID() { return eventID; }
 
     public void setEventID(String eventID) { this.eventID = eventID; }

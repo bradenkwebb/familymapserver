@@ -35,26 +35,26 @@ public class LoadService implements Service {
         Connection conn;
         try (Connection c = db.getConnection()) {
             conn = c;
-            ClearService clearService = new ClearService();
-            clearService.clear();
+
+            // First, clear the database
+            new ClearService().clear();
             UserDAO uDao = new UserDAO(conn);
             PersonDAO pDao = new PersonDAO(conn);
             EventDAO eDao = new EventDAO(conn);
 
-            for (User user : r.getUsers()) {
+            for (User user : r.getUsers()) { // Load in users
                 uDao.insert(user);
             }
-            for (Person person : r.getPersons()) {
+            for (Person person : r.getPersons()) { // Load in people
                 pDao.insert(person);
             }
-            for (Event event : r.getEvents()) {
+            for (Event event : r.getEvents()) { // Load in events
                 eDao.insert(event);
             }
             result.setMessage(String.format("Successfully added %d users, %d persons, and %d events to the database.",
                                             r.getUsers().size(), r.getPersons().size(), r.getEvents().size()));
             result.setSuccess(true);
             db.closeConnection(true);
-            return result;
         } catch(DataAccessException | SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             result.setSuccess(false);

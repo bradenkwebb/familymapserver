@@ -38,9 +38,8 @@ public class LoginService implements Service {
         Connection conn;
         try (Connection c = db.getConnection()) {
             conn = c;
-            boolean valid = new UserDAO(conn).validate(r.getUsername(), r.getPassword());
 
-            if(valid) {
+            if(new UserDAO(conn).validate(r.getUsername(), r.getPassword())) {
                 String generatedToken = UUID.randomUUID().toString();
                 AuthToken token = new AuthToken(generatedToken, r.getUsername());
                 new AuthTokenDAO(conn).insert(token);
@@ -48,22 +47,21 @@ public class LoginService implements Service {
 
                 result.setUsername(r.getUsername());
                 result.setAuthToken(generatedToken);
-                result.setSuccess(valid);
+                result.setSuccess(true);
                 result.setPersonID(personID);
             } else {
-                result.setSuccess(valid);
                 result.setMessage("Error: Invalid credentials");
             }
+
             db.closeConnection(true);
-            return result;
+
         } catch (DataAccessException | SQLException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
-            db.closeConnection(false);
-        }
 
-        result.setSuccess(false);
-        result.setMessage("Error: An error occurred when logging in.");
-        logger.exiting("LoginService", "login");
+            db.closeConnection(false);
+            result.setSuccess(false);
+            result.setMessage("Error: An error occurred when logging in;" + e.getMessage());
+        }
         return result;
     }
 }

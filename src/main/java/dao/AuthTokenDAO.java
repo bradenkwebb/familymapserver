@@ -60,14 +60,12 @@ public class AuthTokenDAO {
             if (rs.next()) {
                 auth = new AuthToken(rs.getString("authtoken"), rs.getString("username"));
                 return auth;
-            } else {
-                return null;
             }
-
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new DataAccessException("Error occurred while searching database for authtoken");
         }
+        return null;
     }
 
     /**

@@ -29,6 +29,13 @@ public class EventDAO {
         }
     }
 
+    /**
+     * Fills a JsonLocationArray object with the contents of the provided JSON file
+     *
+     * @param file the JSON file with the data to use
+     * @return a potentially null JsonLocationArray object
+     * @throws IOException if an error occurs
+     */
     private static JsonLocationArray parse(File file) throws IOException {
         try(FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
@@ -58,14 +65,9 @@ public class EventDAO {
      * @throws DataAccessException if error occurs
      */
     public void insert(Event event) throws DataAccessException {
-        //We can structure our string to be similar to a sql command, but if we insert question
-        //marks we can change them later with help from the statement
         String sql = "INSERT INTO Events (EventID, AssociatedUsername, PersonID, Latitude, Longitude, " +
                 "Country, City, EventType, Year) VALUES(?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            //Using the statements built-in set(type) functions we can pick the question mark we want
-            //to fill in and give it a proper value. The first argument corresponds to the first
-            //question mark found in our sql String
             stmt.setString(1, event.getEventID());
             stmt.setString(2, event.getAssociatedUsername());
             stmt.setString(3, event.getPersonID());
@@ -91,7 +93,7 @@ public class EventDAO {
      * @throws DataAccessException if an error occurs
      */
     public Event find(String eventID) throws DataAccessException {
-        Event event;
+        Event event = new Event();
         ResultSet rs;
         String sql = "SELECT * FROM Events WHERE EventID = ?;";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -99,17 +101,16 @@ public class EventDAO {
             rs = stmt.executeQuery();
             if (rs.next()) {
                 event = new Event(rs.getString("eventID"), rs.getString("associatedUsername"),
-                        rs.getString("personID"), rs.getFloat("latitude"), rs.getFloat("longitude"),
-                        rs.getString("country"), rs.getString("city"), rs.getString("eventType"),
+                        rs.getString("personID"), rs.getFloat("latitude"),
+                        rs.getFloat("longitude"), rs.getString("country"),
+                        rs.getString("city"), rs.getString("eventType"),
                         rs.getInt("year"));
-                return event;
-            } else {
-                return null;
             }
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DataAccessException("Error encountered while finding an event in the database");
         }
+        return event;
     }
 
     /**
@@ -137,32 +138,9 @@ public class EventDAO {
                                         rs.getInt("year"));
                 events.add(event);
             }
-            return events;
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             throw new DataAccessException("An error occurred while obtaining events from database");
-        }
-    }
-
-    private List<Event> getAllFromPerson(String personID) throws DataAccessException {
-        logger.entering("EventDAO", "getAllFromPerson");
-        List<Event> events = new ArrayList<>();
-
-        String sql = "SELECT * FROM Events WHERE personID = ?;";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, personID);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                Event event = new Event(rs.getString("eventID"), rs.getString("associatedUsername"),
-                        rs.getString("personID"), rs.getFloat("latitude"),
-                        rs.getFloat("longitude"), rs.getString("country"),
-                        rs.getString("city"), rs.getString("eventType"),
-                        rs.getInt("year"));
-                events.add(event);
-            }
-        } catch (SQLException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
-            throw new DataAccessException("Error occurred when getting all events for person " + personID);
         }
         return events;
     }
@@ -213,6 +191,15 @@ public class EventDAO {
         this.insert(birth);
     }
 
+    /**
+     * Creates and inserts two marriage events—one for the husband, and one for the wife—that have matching
+     * dates and locations
+     *
+     * @param username the username to associate the marriages too
+     * @param husbandID the personID for the husband
+     * @param wifeID the personID for the wife
+     * @throws DataAccessException if an error occurs
+     */
     public void generateMarriage(String username, String husbandID, String wifeID) throws DataAccessException {
         logger.entering("EventDAO", "generateMarriage");
 
@@ -235,6 +222,14 @@ public class EventDAO {
         this.insert(marriage);
     }
 
+    /**
+     * Creates a death event for the person with the provided personID and inserts the event into the database. We
+     * check to ensure that the death occurs after any other events with which the person is associated
+     *
+     * @param username the user to whom this person is associated
+     * @param personID the identifier for the person whose death this is
+     * @throws DataAccessException if an error occurs
+     */
     public void generateDeath(String username, String personID) throws DataAccessException {
         logger.entering("EventDAO", "generateDeath");
 
@@ -254,11 +249,18 @@ public class EventDAO {
         this.insert(deathEvent);
     }
 
-    public void updatePersonIDs(Person person, String id) throws DataAccessException {
-        if (!person.getPersonID().equals(id)) {
+    /**
+     * Updates every occurrence of the provided person's ID in the Events table with the new ID.
+     *
+     * @param person the person whose events we are to update
+     * @param newID the new personID to update in each event
+     * @throws DataAccessException if an error occurs
+     */
+    public void updatePersonIDs(Person person, String newID) throws DataAccessException {
+        if (!person.getPersonID().equals(newID)) {
             String sql = "UPDATE Events" + " SET personID = ? WHERE personID = ?;";
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setString(1, id);
+                stmt.setString(1, newID);
                 stmt.setString(2, person.getPersonID());
                 logger.finest(sql);
 
@@ -268,6 +270,36 @@ public class EventDAO {
                 throw new DataAccessException("Error: An error occurred while updating events in the database");
             }
         }
+    }
+
+    /**
+     * Collects a list of all the events in the Events table associated to a given personID.
+     *
+     * @param personID the personID we're searching for
+     * @return a (potentially empty) List of Events
+     * @throws DataAccessException if an error occurs
+     */
+    private List<Event> getAllFromPerson(String personID) throws DataAccessException {
+        logger.entering("EventDAO", "getAllFromPerson");
+        List<Event> events = new ArrayList<>();
+
+        String sql = "SELECT * FROM Events WHERE personID = ?;";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, personID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Event event = new Event(rs.getString("eventID"), rs.getString("associatedUsername"),
+                        rs.getString("personID"), rs.getFloat("latitude"),
+                        rs.getFloat("longitude"), rs.getString("country"),
+                        rs.getString("city"), rs.getString("eventType"),
+                        rs.getInt("year"));
+                events.add(event);
+            }
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new DataAccessException("Error occurred when getting all events for person " + personID);
+        }
+        return events;
     }
 
     private Integer getBirthYear(String personID) throws DataAccessException {

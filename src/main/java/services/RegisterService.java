@@ -32,21 +32,19 @@ public class RegisterService implements Service {
      * and returns an authtoken
      *
      * @param r the RegisterRequest object to process
-     * @return
+     * @return the results of the registration attempt
      */
     public RegisterResult register(RegisterRequest r) {
         logger.entering("RegisterService", "register");
 
         RegisterResult result = new RegisterResult();
         Database db = new Database();
-        Connection conn = null;
+        Connection conn;
 
         try(Connection c = db.getConnection()){
             conn = c;
 
-            PersonDAO pDao = new PersonDAO(conn);
             UserDAO uDao = new UserDAO(conn);
-            AuthTokenDAO aDao = new AuthTokenDAO(conn);
 
             if (!requestNotNull(r)) {
                 result.setSuccess(false);
@@ -54,32 +52,34 @@ public class RegisterService implements Service {
             } else if (uDao.find(r.getUsername()) != null) {
                 result.setSuccess(false);
                 result.setMessage("Error: Username already taken");
-            } else if ( ! (r.getGender().equalsIgnoreCase("m") ||
+            } else if ( ! (r.getGender().equalsIgnoreCase("m") || // If gender is neither "m" nor "f"...
                             r.getGender().equalsIgnoreCase("f"))) {
                 result.setSuccess(false);
                 result.setMessage("Error: Gender field must be either \"f\" or \"m\"");
             } else {
 
+                // Create and add the new user
                 User user = new User(r.getUsername(), r.getPassword(), r.getEmail(),
                         r.getFirstName(), r.getLastName(), r.getGender(),
                     r.getFirstName() + "_" + r.getLastName() + UUID.randomUUID().toString().substring(0, 6));
-
                 uDao.insert(user);
 
-                // I'm not sure whether or not I still need to update the person ID for the user
-                Person person = pDao.generate(user, 4);
+                // Generate a family tree for the user
+                new PersonDAO(conn).generate(user, 4);
 
+                // Generate a new authToken for the user's current session
                 AuthToken token = new AuthToken(UUID.randomUUID().toString(), r.getUsername());
-                aDao.insert(token);
+                new AuthTokenDAO(conn).insert(token);
 
                 result.setSuccess(true);
                 result.setAuthtoken(token.getAuthtoken());
                 result.setUsername(user.getUsername());
                 result.setPersonID(user.getPersonID());
             }
-                // Commit transaction and close the connection
-                db.closeConnection(true);
-            return result;
+
+            // Commit transaction and close the connection
+            db.closeConnection(true);
+
         } catch (DataAccessException | SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             ex.printStackTrace();
@@ -92,6 +92,7 @@ public class RegisterService implements Service {
     }
 
     private boolean requestNotNull(RegisterRequest r) {
+
         Set<String> requestFields = new HashSet<>();
         requestFields.add(r.getUsername());
         requestFields.add(r.getPassword());
@@ -105,7 +106,6 @@ public class RegisterService implements Service {
                 return false;
             }
         }
-
         return true;
     }
 }
