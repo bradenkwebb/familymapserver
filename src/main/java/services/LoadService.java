@@ -36,7 +36,7 @@ public class LoadService implements Service {
         try (Connection c = db.getConnection()) {
             conn = c;
             ClearService clearService = new ClearService();
-            clearService.clear(null);
+            clearService.clear();
             UserDAO uDao = new UserDAO(conn);
             PersonDAO pDao = new PersonDAO(conn);
             EventDAO eDao = new EventDAO(conn);

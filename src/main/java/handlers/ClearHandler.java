@@ -1,8 +1,6 @@
 package handlers;
 
 import com.sun.net.httpserver.HttpExchange;
-import requests.RegisterRequest;
-import requests.Request;
 import results.Result;
 import services.ClearService;
 
@@ -21,9 +19,8 @@ public class ClearHandler implements Handler {
         logger.entering("ClearHandler", "handle");
         try {
             if (exchange.getRequestMethod().equalsIgnoreCase("post")) {
-                Request request = deserialize(exchange.getRequestBody(), RegisterRequest.class);
                 ClearService service = new ClearService();
-                Result result = service.clear(request);
+                Result result = service.clear();
 
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                 OutputStream responseBody = exchange.getResponseBody();

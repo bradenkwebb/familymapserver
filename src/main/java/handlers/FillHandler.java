@@ -1,7 +1,6 @@
 package handlers;
 
 import com.sun.net.httpserver.HttpExchange;
-import requests.Request;
 import results.Result;
 import services.FillService;
 
@@ -31,41 +30,35 @@ public class FillHandler implements Handler {
         Result result = new Result();
         int statusCode = HttpURLConnection.HTTP_BAD_REQUEST;
 
-        try {
-            if (exchange.getRequestMethod().equalsIgnoreCase("post")) {
-                String urlPath = exchange.getRequestURI().toString();
-                Integer numGen;
+        if (exchange.getRequestMethod().equalsIgnoreCase("post")) {
+            String urlPath = exchange.getRequestURI().toString();
+            Integer numGen;
 
-                logger.finest(urlPath);
+            logger.finest(urlPath);
 
-                String[] parts = urlPath.split("/");
-                numGen = getNumGenerations(parts);
-                if (numGen != null) {
-                    String username = parts[USERNAME_INDEX];
+            String[] parts = urlPath.split("/");
+            numGen = getNumGenerations(parts);
+            if (numGen != null) {
+                String username = parts[USERNAME_INDEX];
 
-                    logger.finest("username: " + username);
-                    logger.finest("numGen: " + numGen);
+                logger.finest("username: " + username);
+                logger.finest("numGen: " + numGen);
 
-                    Request request = deserialize(exchange.getRequestBody(), Request.class);
-                    result = new FillService().fill(request, username, numGen);
+                result = new FillService().fill(username, numGen);
 
-                    if (result.isSuccess()) {
-                        statusCode = HttpURLConnection.HTTP_OK;
-                    } else {
-                        statusCode = HttpURLConnection.HTTP_INTERNAL_ERROR;
-                    }
+                if (result.isSuccess()) {
+                    statusCode = HttpURLConnection.HTTP_OK;
                 } else {
-                    result.setMessage("Error: Invalid generations parameter");
+                    statusCode = HttpURLConnection.HTTP_INTERNAL_ERROR;
                 }
             } else {
-                statusCode = HttpURLConnection.HTTP_BAD_METHOD;
-                result.setMessage("Error: Invalid request method");
+                result.setMessage("Error: Invalid generations parameter");
             }
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-            result.setSuccess(false);
-            result.setMessage("Error: " + e.getMessage());
+        } else {
+            statusCode = HttpURLConnection.HTTP_BAD_METHOD;
+            result.setMessage("Error: Invalid request method");
         }
+
         exchange.sendResponseHeaders(statusCode, 0);
         writeString(serialize(result), exchange.getResponseBody());
         exchange.getResponseBody().close();

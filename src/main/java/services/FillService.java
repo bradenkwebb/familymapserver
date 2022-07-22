@@ -3,7 +3,6 @@ package services;
 import dao.*;
 import model.Person;
 import model.User;
-import requests.Request;
 import results.Result;
 
 import java.sql.Connection;
@@ -25,12 +24,11 @@ public class FillService implements Service {
      * Populates the server's database with generated data for the specified username. If there is any data in the
      * database already associated with the given username, it is deleted.
      *
-     * @param r the FillRequest object containing information from the request body.
      * @param username the associated username; must already be registered with the server.
      * @param generations the number of generations of ancestors to generate for the user. If not provided, defaults
      *                    to 4.
      */
-    public Result fill(Request r, String username, int generations) {
+    public Result fill(String username, int generations) {
         logger.entering("FillService", "fill");
 
         Result result = new Result();

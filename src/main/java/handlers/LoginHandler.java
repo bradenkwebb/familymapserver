@@ -1,18 +1,14 @@
 package handlers;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import requests.LoginRequest;
-import requests.Request;
 import results.LoginResult;
-import results.Result;
 import services.LoginService;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,10 +19,10 @@ public class LoginHandler implements Handler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         logger.entering("LoginHandler", "handle");
-        boolean success = false;
+        boolean success;
 
         try {
-            if (exchange.getRequestMethod().toLowerCase().equals("post")) {
+            if (exchange.getRequestMethod().equalsIgnoreCase("post")) {
 
                 InputStream bodyJson = exchange.getRequestBody();
 

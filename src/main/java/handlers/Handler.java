@@ -2,15 +2,12 @@ package handlers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import requests.LoginRequest;
 import requests.Request;
 import results.Result;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.logging.Logger;
 
 public interface Handler extends HttpHandler {
     default void writeString(String str, OutputStream os) throws IOException {
