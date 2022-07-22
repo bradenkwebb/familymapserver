@@ -19,33 +19,25 @@ public class FileHandler implements Handler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         logger.entering("FileHandler", "handle");
-        boolean success = false;
+        int statusCode = HttpURLConnection.HTTP_NOT_FOUND;
+        boolean appropriateMethod = exchange.getRequestMethod().equalsIgnoreCase("get");
 
-        try {
-            if (exchange.getRequestMethod().equalsIgnoreCase("get")) {
-                File file = getFile(exchange.getRequestURI().toString());
-
-                if (file.exists()) {
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-                    OutputStream responseBody = exchange.getResponseBody();
-                    Files.copy(file.toPath(), responseBody);
-                    responseBody.close();
-                    success = true;
-                } else {
-                    exchange.sendResponseHeaders(HttpURLConnection.HTTP_NOT_FOUND, 0);
-                    Files.copy(new File(SOURCE_PATH + "/HTML/404.html").toPath(), exchange.getResponseBody());
-//                    writeString("Page not found", exchange.getResponseBody());
-                    exchange.getResponseBody().close();
-                }
-            } else {
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-                exchange.getResponseBody().close();
-            }
-        } catch (IOException e) {
-            exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, 0);
-            exchange.getResponseBody().close();
-            e.printStackTrace();
+        File file = getFile(exchange.getRequestURI().toString());
+        if (!appropriateMethod) {
+            statusCode = HttpURLConnection.HTTP_BAD_METHOD;
+            exchange.sendResponseHeaders(statusCode, 0);
+        } else if (!file.exists()) {
+            exchange.sendResponseHeaders(statusCode, 0);
+            file = new File(SOURCE_PATH + "/HTML/404.html");
+        } else {
+            statusCode = HttpURLConnection.HTTP_OK;
+            exchange.sendResponseHeaders(statusCode, 0);
         }
+        if (appropriateMethod){
+            Files.copy(file.toPath(), exchange.getResponseBody());
+        }
+
+        exchange.getResponseBody().close();
     }
 
     private File getFile(String urlPath) {
