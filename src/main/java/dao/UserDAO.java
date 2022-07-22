@@ -1,13 +1,17 @@
 package dao;
 
 import model.User;
-import java.sql.*;
-import java.util.Objects;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UserDAO {
     public static final Logger logger = Logger.getLogger("UserDAO");
+
     /**
      * The connection to the SQLite database.
      */
@@ -52,6 +56,12 @@ public class UserDAO {
         }
     }
 
+    /**
+     * Updates the row in the Users table matching the provided user's username to the current state of the user.
+     *
+     * @param user the user to update
+     * @throws DataAccessException if an error occurs
+     */
     public void update(User user) throws DataAccessException {
         logger.entering("UserDAO", "insert");
         String sql = "UPDATE Users " + "SET username = ?, password = ?, email = ?, firstName = ?, " +
@@ -69,11 +79,9 @@ public class UserDAO {
             logger.finest(stmt.toString());
 
             stmt.executeUpdate();
-            logger.exiting("UserDAO", "update");
         } catch (SQLException ex) {
             ex.printStackTrace();
             logger.log(Level.WARNING, ex.getMessage(), ex);
-            logger.exiting("UserDAO", "");
             throw new DataAccessException("Error encountered when updating user in database");
         }
     }
@@ -98,9 +106,8 @@ public class UserDAO {
                         rs.getString("lastName"), rs.getString("gender"),
                         rs.getString("personID"));
                 return user;
-            } else {
-                return null;
             }
+            return null;
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new DataAccessException("Error encountered while finding a user in the database");

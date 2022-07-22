@@ -117,11 +117,11 @@ public class PersonDAO {
                                     rs.getString("motherID"), rs.getString("spouseID"));
                 return person;
             }
-            return null;
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new DataAccessException("Error occurred while searching through person table");
         }
+        return null;
     }
 
     /**
@@ -159,12 +159,12 @@ public class PersonDAO {
                         rs.getString("gender"), rs.getString("fatherID"),
                         rs.getString("motherID"), rs.getString("spouseID")));
             }
-            return family;
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new DataAccessException("Error occurred while trying to get all of " +
                     username + "'s family from persons table");
         }
+        return family;
     }
 
     /**
@@ -184,25 +184,6 @@ public class PersonDAO {
         }
     }
 
-    /*
-    * Each person, excluding the user, must have at least three events with the following types: birth, marriage, and death.
-    *       They may have additional events as well, but we will only be checking for these three.
-    * The user’s person object needs to have at least a birth event, and may have additional events, but
-    *       we will only be checking for the birth event.
-    * Parents must be born at least 13 years before their children.
-    * Parents must be at least 13 years old when they are married.
-    * Parents must not die before their child is born.
-    * Women must not give birth when older than 50 years old.
-    * Birth events must be the first event for a person chronologically.
-    * Death events must be the last event for a person chronologically.
-    * Nobody must die at an age older than 120 years old.
-    * Each person in a married couple has their own marriage event. Each event will have a unique event ID,
-    *       but both marriage events must have matching years and locations.
-    * Event locations may be randomly selected, or you may try to make them more realistic (e.g., many people live
-    *       their lives in a relatively small geographical area).
-
-    * */
-
     /**
      * Given a user that should already be in the database, generates and inserts persons up to the provided number
      * of generations with their respective birth, marriage, and death dates and adds all of that information
@@ -216,6 +197,7 @@ public class PersonDAO {
     public Person generate(User user, int numGenerations) throws DataAccessException {
         int currentYear = Year.now().getValue();
         int birthYear = randomYear(currentYear - MAX_AGE, currentYear);
+
         // Randomly generate all family members and a person object for the user
         Person person = generate(user.getUsername(), user.getGender(), numGenerations,
                 birthYear);
@@ -254,10 +236,14 @@ public class PersonDAO {
             mother = generate(username, "f", numGenerations - 1,
                               randomYear(personBirthYear - MAX_PREGNANCY_AGE, personBirthYear - MIN_FERTILITY_AGE));
             motherID = mother.getPersonID();
+
             // Fathers should be between ages 13 and 120
             father = generate(username, "m", numGenerations - 1,
                               randomYear(personBirthYear - MAX_AGE, personBirthYear - MIN_FERTILITY_AGE));
             fatherID = father.getPersonID();
+
+            // Add each other as spouses, and generate marriage and death events
+            // (apparently users can't have living parents)
             mother.setSpouseID(fatherID);
             father.setSpouseID(motherID);
             updatePersonByID(mother);
@@ -328,12 +314,7 @@ public class PersonDAO {
      * @return the selected first name
      */
     private String randomFirstName(String gender) {
-        ArrayList<String> names;
-        if (gender.equals("f")) {
-            names = fnames.getData();
-        } else {
-            names = mnames.getData();
-        }
+        ArrayList<String> names = (gender.equals("f")) ? fnames.getData() : mnames.getData();
         return names.get(new Random().nextInt(names.size()));
     }
 
