@@ -18,7 +18,10 @@ import java.util.logging.Logger;
  */
 public class PersonDAO {
     public static final Logger logger = Logger.getLogger("PersonDAO");
-    private static final int MAX_AGE = 120;
+    public static final int MAX_AGE = 120;
+    public static final int MIN_MARRIAGE_AGE = 13;
+    private static final int MAX_PREGNANCY_AGE = 50;
+    private static final int MIN_FERTILITY_AGE = 13;
     private static final JsonStringArray fnames;
     private static final JsonStringArray mnames;
     private static final JsonStringArray snames;
@@ -113,9 +116,8 @@ public class PersonDAO {
                                     rs.getString("gender"), rs.getString("fatherID"),
                                     rs.getString("motherID"), rs.getString("spouseID"));
                 return person;
-            } else {
-                return null;
             }
+            return null;
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new DataAccessException("Error occurred while searching through person table");
@@ -138,10 +140,10 @@ public class PersonDAO {
     }
 
     /**
-     * Obtains a list of all of the people who are associated with a given user.
+     * Obtains a list of all the people who are associated with a given user.
      *
      * @param username the identifier for the user in question.
-     * @return a list of all of the people in the user's family tree.
+     * @return a list of all the people in the user's family tree.
      * @throws DataAccessException if an error occurs
      */
     public List<Person> getAllFamily(String username) throws DataAccessException {
@@ -229,7 +231,7 @@ public class PersonDAO {
     }
 
     /**
-     * Recursively enerates a person and ancestors for that person up to the provided number of generations, along
+     * Recursively generates a person and ancestors for that person up to the provided number of generations, along
      * with their corresponding birth, marriage, and death dates.
      *
      * @param username the username for the user to whom this family tree belongs
@@ -250,11 +252,11 @@ public class PersonDAO {
         if (numGenerations >= 1) {
             // Mothers should be between ages 13 and 50
             mother = generate(username, "f", numGenerations - 1,
-                              randomYear(personBirthYear - 50, personBirthYear - 13));
+                              randomYear(personBirthYear - MAX_PREGNANCY_AGE, personBirthYear - MIN_FERTILITY_AGE));
             motherID = mother.getPersonID();
             // Fathers should be between ages 13 and 120
             father = generate(username, "m", numGenerations - 1,
-                              randomYear(personBirthYear - MAX_AGE, personBirthYear - 13));
+                              randomYear(personBirthYear - MAX_AGE, personBirthYear - MIN_FERTILITY_AGE));
             fatherID = father.getPersonID();
             mother.setSpouseID(fatherID);
             father.setSpouseID(motherID);
@@ -336,7 +338,7 @@ public class PersonDAO {
     }
 
     /**
-     * Selects a random surname from the statically generated lsit
+     * Selects a random surname from the statically generated list
      *
      * @param fatherID I don't actually use this parameter, but in theory it could be used to ensure that
      *                 last names are passed down patriarchally
