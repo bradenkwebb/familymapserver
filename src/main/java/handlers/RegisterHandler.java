@@ -51,7 +51,6 @@ public class RegisterHandler implements Handler {
                              "missing or has invalid value");
         }
 
-
         exchange.sendResponseHeaders(statusCode, 0);
         OutputStream responseBody = exchange.getResponseBody();
         writeString(serialize(result), responseBody);

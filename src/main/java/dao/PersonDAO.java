@@ -217,8 +217,6 @@ public class PersonDAO {
         // Randomly generate all family members and a person object for the user
         Person person = generate(user.getUsername(), user.getGender(), numGenerations,
                 birthYear);
-        // Reset the previously-generated user's personID to the value of the person in the database
-        user.setPersonID(person.getPersonID());
 
         // Update the user's Person to the correct values
         person.setGender(user.getGender());
@@ -226,7 +224,7 @@ public class PersonDAO {
         person.setLastName(user.getLastName());
 
         // Push those updates to the database
-        updatePersonByID(person);
+        updatePersonByID(person, user.getPersonID());
         return person;
     }
 
@@ -261,13 +259,18 @@ public class PersonDAO {
             fatherID = father.getPersonID();
             mother.setSpouseID(fatherID);
             father.setSpouseID(motherID);
+            updatePersonByID(mother);
+            updatePersonByID(father);
             eventDAO.generateMarriage(username, fatherID, motherID);
             eventDAO.generateDeath(username, fatherID);
             eventDAO.generateDeath(username, motherID);
         }
 
-        String personID = UUID.randomUUID().toString();
-        Person person = new Person(personID, username, randomFirstName(gender), randomLastName(fatherID), gender, fatherID, motherID, null);
+        String firstName = randomFirstName(gender);
+        String lastName = randomLastName(fatherID);
+        String personID = firstName + "_" + lastName + UUID.randomUUID().toString().substring(0, 6);
+
+        Person person = new Person(personID, username, firstName, lastName, gender, fatherID, motherID, null);
         insert(person);
 
         eventDAO.generateBirth(username, personID, personBirthYear);
@@ -355,11 +358,15 @@ public class PersonDAO {
      * @throws DataAccessException if an error occurs
      */
     private void updatePersonByID(Person person) throws DataAccessException {
+        updatePersonByID(person, person.getPersonID());
+    }
+
+    private void updatePersonByID(Person person, String newID) throws DataAccessException {
         String sql = "UPDATE Persons " + "SET personID = ?, associatedUsername = ?, firstName = ?, lastName = ?, " +
                 "gender = ?, motherID = ?, fatherID = ?, spouseID = ? " +
                 "WHERE personID = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, person.getPersonID());
+            stmt.setString(1, newID);
             stmt.setString(2, person.getAssociatedUsername());
             stmt.setString(3, person.getFirstName());
             stmt.setString(4, person.getLastName());
@@ -374,9 +381,9 @@ public class PersonDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
             logger.log(Level.WARNING, ex.getMessage(), ex);
-            throw new DataAccessException("Error occurred while updating a person in database");
+            throw new DataAccessException("Error: An error occurred while updating a person in database");
         }
-
+        new EventDAO(conn).updatePersonIDs(person, newID);
     }
 
     /**

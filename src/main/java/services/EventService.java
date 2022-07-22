@@ -55,7 +55,7 @@ public class EventService implements Service {
                     result.setSuccess(true);
                 } else {
                     result.setSuccess(false);
-                    result.setMessage("Event not found (at least not for this user)");
+                    result.setMessage("Error: Event not found (at least not for this user)");
                 }
             } else {
                 result = new AllEventsResult(events);
@@ -66,7 +66,7 @@ public class EventService implements Service {
         } catch (DataAccessException | SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage(), ex);
             db.closeConnection(false);
-            result.setMessage("An error occurred when accessing events.");
+            result.setMessage("Error: " + ex.getMessage());
         }
         return result;
     }

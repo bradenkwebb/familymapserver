@@ -7,11 +7,10 @@ import model.User;
 import requests.RegisterRequest;
 import results.RegisterResult;
 
-import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,19 +48,21 @@ public class RegisterService implements Service {
             UserDAO uDao = new UserDAO(conn);
             AuthTokenDAO aDao = new AuthTokenDAO(conn);
 
-            if (!checkNotNull(r)) {
+            if (!requestNotNull(r)) {
                 result.setSuccess(false);
                 result.setMessage("Error: missing or null field");
             } else if (uDao.find(r.getUsername()) != null) {
                 result.setSuccess(false);
                 result.setMessage("Error: Username already taken");
-            } else if (!r.getGender().equalsIgnoreCase("m") && !r.getGender().equalsIgnoreCase("f")) {
+            } else if ( ! (r.getGender().equalsIgnoreCase("m") ||
+                            r.getGender().equalsIgnoreCase("f"))) {
                 result.setSuccess(false);
                 result.setMessage("Error: Gender field must be either \"f\" or \"m\"");
             } else {
 
-                User user = new User(r.getUsername(), r.getPassword(), r.getEmail(), r.getFirstName(),
-                        r.getLastName(), r.getGender(), UUID.randomUUID().toString());
+                User user = new User(r.getUsername(), r.getPassword(), r.getEmail(),
+                        r.getFirstName(), r.getLastName(), r.getGender(),
+                    r.getFirstName() + "_" + r.getLastName() + UUID.randomUUID().toString().substring(0, 6));
 
                 uDao.insert(user);
 
@@ -74,7 +75,7 @@ public class RegisterService implements Service {
                 result.setSuccess(true);
                 result.setAuthtoken(token.getAuthtoken());
                 result.setUsername(user.getUsername());
-                result.setPersonID(person.getPersonID());
+                result.setPersonID(user.getPersonID());
             }
                 // Commit transaction and close the connection
                 db.closeConnection(true);
@@ -90,8 +91,8 @@ public class RegisterService implements Service {
         return result;
     }
 
-    private boolean checkNotNull(RegisterRequest r) {
-        HashSet<String> requestFields = new HashSet<>();
+    private boolean requestNotNull(RegisterRequest r) {
+        Set<String> requestFields = new HashSet<>();
         requestFields.add(r.getUsername());
         requestFields.add(r.getPassword());
         requestFields.add(r.getEmail());

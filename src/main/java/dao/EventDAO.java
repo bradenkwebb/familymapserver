@@ -1,10 +1,7 @@
 package dao;
 
 import com.google.gson.Gson;
-import model.Event;
-import model.JsonLocationArray;
-import model.JsonStringArray;
-import model.Location;
+import model.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -255,6 +252,22 @@ public class EventDAO {
                                      deathLocation.getLongitude(), deathLocation.getCountry(),
                                      deathLocation.getCity(), "death", deathYear);
         this.insert(deathEvent);
+    }
+
+    public void updatePersonIDs(Person person, String id) throws DataAccessException {
+        if (!person.getPersonID().equals(id)) {
+            String sql = "UPDATE Events" + " SET personID = ? WHERE personID = ?;";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, id);
+                stmt.setString(2, person.getPersonID());
+                logger.finest(sql);
+
+                stmt.executeUpdate();
+            } catch (SQLException ex) {
+                logger.log(Level.SEVERE, ex.getMessage(), ex);
+                throw new DataAccessException("Error: An error occurred while updating events in the database");
+            }
+        }
     }
 
     private Integer getBirthYear(String personID) throws DataAccessException {
