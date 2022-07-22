@@ -93,7 +93,7 @@ public class EventDAO {
      * @throws DataAccessException if an error occurs
      */
     public Event find(String eventID) throws DataAccessException {
-        Event event = new Event();
+        Event event;
         ResultSet rs;
         String sql = "SELECT * FROM Events WHERE EventID = ?;";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -105,12 +105,13 @@ public class EventDAO {
                         rs.getFloat("longitude"), rs.getString("country"),
                         rs.getString("city"), rs.getString("eventType"),
                         rs.getInt("year"));
+                return event;
             }
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DataAccessException("Error encountered while finding an event in the database");
         }
-        return event;
+        return null;
     }
 
     /**
@@ -181,8 +182,7 @@ public class EventDAO {
 
     /**
      * Creates an event corresponding to a birth given an associated username, a personID for whom the event should
-     * correspond, and the birth year of their child in the family tree. the birth event generated will be 13 and 50
-     * years before their child's birth year.
+     * correspond, and their birth year.
      *
      * @param username the identifier for the associated user
      * @param personID the identifier for the person whose birth this is
@@ -334,7 +334,10 @@ public class EventDAO {
         ArrayList<Location> locations = EventDAO.locations.getData();
         return locations.get(new Random().nextInt(locations.size()));
     }
-    private int randomYear(int min, int max) {
+    private int randomYear(int min, int max) throws DataAccessException {
+        if (min > max) {
+            throw new DataAccessException("Error: The minimum year was greater than the maximum");
+        }
         return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 }
