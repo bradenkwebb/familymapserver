@@ -13,16 +13,16 @@ public class FillHandler implements Handler {
     public static final Logger logger = Logger.getLogger("FillHandler");
 
     /** The location to look for the username in the HTTP request URI */
-    private final int USERNAME_INDEX = 2;
+    private static final int USERNAME_INDEX = 2;
 
     /**
      * The location to look for the parameter corresponding to the number of generations to fill
      * in the HTTP request URI
      */
-    private final int NUM_GEN_INDEX = 3;
+    private static final int NUM_GEN_INDEX = 3;
 
     /** The default number of generations to fill, if not told otherwise */
-    private final int DEFAULT_NUM_GEN = 4;
+    private static final int DEFAULT_NUM_GEN = 4;
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -30,20 +30,25 @@ public class FillHandler implements Handler {
         Result result = new Result();
         int statusCode = HttpURLConnection.HTTP_BAD_REQUEST;
 
-        if (exchange.getRequestMethod().equalsIgnoreCase("post")) {
+        if (!exchange.getRequestMethod().equalsIgnoreCase("post")) {
+            statusCode = HttpURLConnection.HTTP_BAD_METHOD;
+            result.setMessage("Error: Invalid request method");
+        } else {
             String urlPath = exchange.getRequestURI().toString();
             Integer numGen;
 
+            String[] urlParts = urlPath.split("/");
+            String username = urlParts[USERNAME_INDEX];
+            numGen = getNumGenerations(urlParts);
+
             logger.finest(urlPath);
+            logger.finest("username: " + username);
+            logger.finest("numGen: " + numGen);
+            if (numGen == null) {
+                result.setMessage("Error: Invalid generations parameter");
+            } else {
 
-            String[] parts = urlPath.split("/");
-            numGen = getNumGenerations(parts);
-            if (numGen != null) {
-                String username = parts[USERNAME_INDEX];
-
-                logger.finest("username: " + username);
-                logger.finest("numGen: " + numGen);
-
+                // Only fill this result if we have a valid URL
                 result = new FillService().fill(username, numGen);
 
                 if (result.isSuccess()) {
@@ -51,12 +56,7 @@ public class FillHandler implements Handler {
                 } else {
                     statusCode = HttpURLConnection.HTTP_INTERNAL_ERROR;
                 }
-            } else {
-                result.setMessage("Error: Invalid generations parameter");
             }
-        } else {
-            statusCode = HttpURLConnection.HTTP_BAD_METHOD;
-            result.setMessage("Error: Invalid request method");
         }
 
         exchange.sendResponseHeaders(statusCode, 0);
