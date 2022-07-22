@@ -17,25 +17,13 @@ public class ClearHandler implements Handler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         logger.entering("ClearHandler", "handle");
-        try {
-            if (exchange.getRequestMethod().equalsIgnoreCase("post")) {
-                ClearService service = new ClearService();
-                Result result = service.clear();
 
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-                OutputStream responseBody = exchange.getResponseBody();
-                writeString(serialize(result), responseBody);
-                exchange.getResponseBody().close();
-            } else {
-                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 0);
-                exchange.getResponseBody().close();
-            }
-        } catch(IOException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
-            ex.printStackTrace();
-            exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, 0);
-            exchange.getResponseBody().close();
-        }
-        logger.exiting("ClearHandler", "handle");
+        Result result = new ClearService().clear();
+
+        int statusCode = (result.isSuccess()) ? HttpURLConnection.HTTP_OK : HttpURLConnection.HTTP_BAD_REQUEST;
+
+        exchange.sendResponseHeaders(statusCode, 0);
+        writeString(serialize(result), exchange.getResponseBody());
+        exchange.getResponseBody().close();
     }
 }
