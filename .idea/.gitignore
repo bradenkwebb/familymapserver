@@ -2,4 +2,4 @@
 /shelf/
 /workspace.xml
 familymap.sqlite
-target/*
+target/**
