@@ -33,7 +33,7 @@ public class PersonService implements Service {
      * @param username the user whose family members we're searching for
      * @param urlPath the url path determining whether we're searching for one or multiple people
      * @return Returns either a PersonResult(), PeopleResult(), or Result() object corresponding to whether the provided
-     *          urlPath requests an individual or all people in the user's family tree and whether the
+     *          urlPath requests an individual or all people in the user's family tree
      */
     public Result getResult(String username, String urlPath) {
         logger.entering("PersonService", "getResult");
