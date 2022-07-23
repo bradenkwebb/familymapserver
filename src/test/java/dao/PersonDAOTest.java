@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
+import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -18,6 +19,7 @@ public class PersonDAOTest {
     private Person me;
     private Person anna;
     private Person nathan;
+    private Person hannah;
     private PersonDAO pDao;
 
     @BeforeEach
@@ -33,6 +35,8 @@ public class PersonDAOTest {
 
         nathan = new Person("nathan_id", "nwebb77", "Nathan",
                             "Webb", "m");
+        hannah = new Person("hannah_id", "nwebb77", "Hannah",
+                            "Webb", "f");
 
         Connection conn = db.getConnection();
         pDao = new PersonDAO(conn);
@@ -106,7 +110,9 @@ public class PersonDAOTest {
 
     @Test
     public void getAllFamilyFail() throws DataAccessException {
-        // not really sure what to put here
+        assertDoesNotThrow(() -> pDao.getAllFamily("bkwebb23"));
+        List<Person> people = pDao.getAllFamily("bkwebb23");
+        assertEquals(0, people.size());
     }
 
     @Test
@@ -162,7 +168,10 @@ public class PersonDAOTest {
     }
 
     @Test
-    public void generateFail() throws DataAccessException {}
+    public void generateFail() throws DataAccessException {
+        pDao.insert(anna);
+        assertThrows(DataAccessException.class, () -> pDao.generate("bkwebb23", "m", -3, 1999));
+    }
 
     @Test
     public void totalNumPeoplePass() throws DataAccessException {
@@ -181,11 +190,33 @@ public class PersonDAOTest {
     }
 
     @Test
-    public void totalNumPeopleFail() throws DataAccessException {}
+    public void totalNumPeopleFail() throws DataAccessException {
+        assertDoesNotThrow(() -> pDao.totalNumPeople());
+        pDao.insert(anna);
+        assertEquals(1, pDao.totalNumPeople());
+        pDao.clearUser("aceverett");
+        assertEquals(0, pDao.totalNumPeople());
+    }
 
     @Test
-    public void famSizePass() throws DataAccessException {}
+    public void famSizePass() throws DataAccessException {
+        assertDoesNotThrow(() -> pDao.famSize("bkwebb23"));
+        assertEquals(0, pDao.famSize("bkwebb23"));
+        pDao.insert(me);
+        pDao.insert(nathan);
+        pDao.insert(hannah);
+        assertEquals(2, pDao.famSize("nwebb77"));
+    }
 
     @Test
-    public void famSizeFail() throws DataAccessException {}
+    public void famSizeFail() throws DataAccessException {
+        pDao.insert(me);
+        pDao.insert(anna);
+        pDao.insert(hannah);
+        pDao.insert(nathan);
+        assertEquals(0, pDao.famSize("stacy"));
+        assertEquals(1, pDao.famSize("bkwebb23"));
+        pDao.clearUser("bkwebb23");
+        assertEquals(0, pDao.famSize("bkwebb23"));
+    }
 }

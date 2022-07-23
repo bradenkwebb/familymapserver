@@ -251,6 +251,9 @@ public class PersonDAO {
             eventDAO.generateMarriage(username, fatherID, motherID);
             eventDAO.generateDeath(username, fatherID);
             eventDAO.generateDeath(username, motherID);
+        } else if (numGenerations < 0) {
+            throw new DataAccessException("Error: The number of generations should never be less than 0, " +
+                                            "but numGen=" + numGenerations);
         }
 
         String firstName = randomFirstName(gender);
