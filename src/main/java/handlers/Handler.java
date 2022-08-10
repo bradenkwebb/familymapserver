@@ -3,7 +3,6 @@ package handlers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpHandler;
-import requests.Request;
 import results.Result;
 
 import java.io.*;
@@ -42,7 +41,7 @@ public interface Handler extends HttpHandler {
      * @return the resulting Object type
      * @throws IOException if an I/O error occurs
      */
-    default Request deserialize(InputStream bodyStream, Class<? extends Request> classType) throws IOException {
+    default <T> T deserialize(InputStream bodyStream, Class<T> classType) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(bodyStream, StandardCharsets.UTF_8));
         Gson gson = new Gson();
         return gson.fromJson(br, classType);

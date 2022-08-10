@@ -9,7 +9,6 @@ import services.PersonService;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class PersonHandler implements Handler {

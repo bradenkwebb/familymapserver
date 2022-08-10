@@ -4,7 +4,6 @@ import model.Event;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import passoffresult.FillResult;
 import requests.RegisterRequest;
 import results.AllEventsResult;
 import results.RegisterResult;

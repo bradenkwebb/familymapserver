@@ -5,9 +5,7 @@ import results.Result;
 import services.ClearService;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ClearHandler implements Handler {

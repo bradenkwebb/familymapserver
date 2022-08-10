@@ -7,8 +7,6 @@ import results.Result;
 import services.LoginService;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,5 +41,4 @@ public class LoginHandler implements Handler {
         writeString(serialize(result), exchange.getResponseBody());
         exchange.getResponseBody().close();
     }
-
 }

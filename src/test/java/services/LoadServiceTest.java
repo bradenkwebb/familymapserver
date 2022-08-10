@@ -1,6 +1,5 @@
 package services;
 
-import com.sun.net.httpserver.HttpExchange;
 import handlers.Handler;
 import handlers.LoadHandler;
 import model.Event;

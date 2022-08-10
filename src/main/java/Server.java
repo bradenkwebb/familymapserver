@@ -70,7 +70,7 @@ public class Server {
 
         server.start();
 
-        logger.info("Server started");
+        logger.info("Server started; running at" + server.getAddress().toString());
     }
 
     /**

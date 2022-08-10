@@ -6,7 +6,6 @@ import services.FillService;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FillHandler implements Handler {

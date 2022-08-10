@@ -1,16 +1,12 @@
 package handlers;
 
-import com.google.gson.stream.MalformedJsonException;
 import com.sun.net.httpserver.HttpExchange;
 import requests.RegisterRequest;
 import results.RegisterResult;
 import services.RegisterService;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RegisterHandler implements Handler {
